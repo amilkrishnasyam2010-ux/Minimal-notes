@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Stellar — Modern Single Page Website</title>
+  <meta name="description" content="Fully styled modern single-page website demo with responsive layout, animations, and accessible interactions." />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="#">Stellar</a>
+
+      <nav class="site-nav" aria-label="Primary navigation">
+        <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="primaryNav">
+          <span class="hamburger" aria-hidden="true"></span>
+          <span class="sr-only">Toggle navigation</span>
+        </button>
+
+        <ul class="nav-list" id="primaryNav">
+          <li><a href="#hero">Home</a></li>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#portfolio">Portfolio</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <button id="themeToggle" class="theme-toggle" aria-pressed="false" title="Toggle color theme">🌙</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- Hero -->
+    <section id="hero" class="hero">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <h1 class="display">Design. Build. Launch.</h1>
+          <p class="lead">Beautifully crafted websites, fast performance, accessible by design — everything you need to launch your presence.</p>
+          <div class="cta-row">
+            <a class="btn btn-primary" href="#portfolio">View Work</a>
+            <a class="btn btn-outline" href="#contact">Get a Quote</a>
+          </div>
+          <ul class="hero-stats">
+            <li><strong>120+</strong><span>Projects</span></li>
+            <li><strong>5.0</strong><span>Client Rating</span></li>
+            <li><strong>99ms</strong><span>Avg. Response</span></li>
+          </ul>
+        </div>
+        <div class="hero-media" aria-hidden="true">
+          <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=3b2a9b8e6b35a9b2e063f2a8a8b6a3e6" alt="A clean modern workspace" />
+        </div>
+      </div>
+    </section>
+
+    <!-- Features -->
+    <section id="features" class="section">
+      <div class="container">
+        <h2 class="section-title">Core Features</h2>
+        <p class="section-sub">Everything included to move from idea to launch.</p>
+
+        <div class="features-grid">
+          <article class="feature-card">
+            <div class="icon">⚡</div>
+            <h3>Lightning Fast</h3>
+            <p>Optimized markup, images and assets for rapid page loads and great performance scores.</p>
+          </article>
+
+          <article class="feature-card">
+            <div class="icon">🔒</div>
+            <h3>Secure</h3>
+            <p>Built with security best practices and safe defaults out of the box.</p>
+          </article>
+
+          <article class="feature-card">
+            <div class="icon">🎨</div>
+            <h3>Pixel-Perfect</h3>
+            <p>Modern design system, consistent spacing, and attention to detail for delightful UI.</p>
+          </article>
+
+          <article class="feature-card">
+            <div class="icon">♿</div>
+            <h3>Accessible</h3>
+            <p>Keyboard-friendly, semantic HTML and ARIA where needed for inclusive experiences.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Portfolio -->
+    <section id="portfolio" class="section alt">
+      <div class="container">
+        <h2 class="section-title">Selected Work</h2>
+        <p class="section-sub">A small selection of projects showcasing different styles and approaches.</p>
+
+        <div class="portfolio-grid" id="portfolioGrid">
+          <!-- Portfolio items generated in HTML so JS can attach modal triggers -->
+          <article class="portfolio-item" data-title="E-commerce Redesign" data-img="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=1200&auto=format&fit=crop">
+            <img src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=800&auto=format&fit=crop" alt="E-commerce project thumbnail" />
+            <div class="portfolio-body">
+              <h3>E-commerce Redesign</h3>
+              <p>Modern checkout flow and conversion-first UI.</p>
+            </div>
+          </article>
+
+          <article class="portfolio-item" data-title="SaaS Dashboard" data-img="https://images.unsplash.com/photo-1508385082359-fb9fcb1b3dc8?q=80&w=1200&auto=format&fit=crop">
+            <img src="https://images.unsplash.com/photo-1508385082359-fb9fcb1b3dc8?q=80&w=800&auto=format&fit=crop" alt="SaaS dashboard thumbnail" />
+            <div class="portfolio-body">
+              <h3>SaaS Dashboard</h3>
+              <p>Data-driven layouts and real-time metrics UX.</p>
+            </div>
+          </article>
+
+          <article class="portfolio-item" data-title="Agency Landing" data-img="https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1200&auto=format&fit=crop">
+            <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=800&auto=format&fit=crop" alt="Agency landing thumbnail" />
+            <div class="portfolio-body">
+              <h3>Agency Landing</h3>
+              <p>High-conversion hero & lead-gen forms.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pricing -->
+    <section id="pricing" class="section">
+      <div class="container">
+        <h2 class="section-title">Pricing</h2>
+        <p class="section-sub">Simple, transparent pricing for teams and individuals.</p>
+
+        <div class="pricing-grid">
+          <article class="price-card">
+            <h3>Starter</h3>
+            <div class="price">₹9,999<span class="per"> / one-time</span></div>
+            <ul>
+              <li>Single page</li>
+              <li>Responsive design</li>
+              <li>Basic SEO</li>
+            </ul>
+            <a class="btn btn-primary" href="#contact">Choose</a>
+          </article>
+
+          <article class="price-card featured">
+            <h3>Pro</h3>
+            <div class="price">₹29,999<span class="per"> / one-time</span></div>
+            <ul>
+              <li>Multi-page site</li>
+              <li>CMS integration</li>
+              <li>Performance optimization</li>
+            </ul>
+            <a class="btn btn-white" href="#contact">Choose</a>
+          </article>
+
+          <article class="price-card">
+            <h3>Agency</h3>
+            <div class="price">Custom</div>
+            <ul>
+              <li>Enterprise features</li>
+              <li>Design system</li>
+              <li>Support & SLA</li>
+            </ul>
+            <a class="btn btn-primary" href="#contact">Contact</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="section alt">
+      <div class="container">
+        <h2 class="section-title">Testimonials</h2>
+        <div class="testimonials" id="testimonials">
+          <button class="carousel-btn prev" id="testPrev" aria-label="Previous testimonial">‹</button>
+          <ul class="testimonial-list" id="testimonialList">
+            <li class="testimonial active">
+              <p>“They delivered beyond expectations — quick, communicative and detail-oriented.”</p>
+              <footer>- Priya S., Founder</footer>
+            </li>
+            <li class="testimonial">
+              <p>“Our conversion rate went up 38% after the redesign.”</p>
+              <footer>- Raj M., Product Lead</footer>
+            </li>
+            <li class="testimonial">
+              <p>“A pleasure to work with. Thorough documentation and clean code.”</p>
+              <footer>- Ananya K., CTO</footer>
+            </li>
+          </ul>
+          <button class="carousel-btn next" id="testNext" aria-label="Next testimonial">›</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="section">
+      <div class="container contact-grid">
+        <div class="contact-info">
+          <h2 class="section-title">Get in touch</h2>
+          <p class="section-sub">Tell us about your project and we'll send a quote.</p>
+          <ul class="contact-list">
+            <li>📍 Mumbai, India</li>
+            <li>✉️ hello@stellar.example</li>
+            <li>📞 +91 98765 43210</li>
+          </ul>
+        </div>
+
+        <form id="contactForm" class="contact-form" novalidate>
+          <label>
+            <span>Name</span>
+            <input type="text" name="name" id="name" required minlength="2" placeholder="Your name" />
+            <span class="field-error" id="errName" aria-live="polite"></span>
+          </label>
+
+          <label>
+            <span>Email</span>
+            <input type="email" name="email" id="email" required placeholder="you@example.com" />
+            <span class="field-error" id="errEmail" aria-live="polite"></span>
+          </label>
+
+          <label>
+            <span>Message</span>
+            <textarea name="message" id="message" required rows="5" placeholder="Tell us more"></textarea>
+            <span class="field-error" id="errMessage" aria-live="polite"></span>
+          </label>
+
+          <div class="form-actions">
+            <button class="btn btn-primary" type="submit">Send Message</button>
+            <button class="btn btn-outline" type="reset">Reset</button>
+          </div>
+
+          <div id="formStatus" role="status" aria-live="polite" class="form-status"></div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>
+        <strong>Stellar</strong> &mdash; Built with ❤️
+      </div>
+      <nav aria-label="Footer">
+        <a href="#privacy">Privacy</a>
+        <a href="#terms">Terms</a>
+      </nav>
+    </div>
+  </footer>
+
+  <!-- Portfolio Modal -->
+  <div id="portfolioModal" class="modal" role="dialog" aria-hidden="true" aria-labelledby="modalTitle">
+    <div class="modal-backdrop" id="modalBackdrop"></div>
+    <div class="modal-panel" role="document">
+      <button class="modal-close" id="modalClose" aria-label="Close">✕</button>
+      <h3 id="modalTitle"></h3>
+      <img id="modalImage" alt="" />
+      <p id="modalDesc">Detailed project description goes here. This demo provides a preview and call to action.</p>
+      <a id="modalCTA" class="btn btn-primary" href="#contact">Start a Project</a>
+    </div>
+  </div>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
