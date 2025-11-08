@@ -167,5 +167,3 @@ function showPDF(chapter) {
   `;
   container.classList.remove("hidden");
 }
-
-
