@@ -133,6 +133,49 @@ body {
 button:hover {
   background: #0056b3;
 }
+/* ---------- Animated & Stylish Hero Section ---------- */
+.hero {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(120deg, #007bff, #4a00e0, #ff0080);
+  background-size: 400% 400%;
+  animation: gradientMove 10s ease infinite;
+  color: #fff;
+  padding: 80px 20px;
+  text-align: center;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.hero h1 {
+  font-size: 3rem;
+  margin: 0;
+  letter-spacing: 1px;
+  text-shadow: 0 0 10px rgba(255,255,255,0.6);
+  z-index: 2;
+  position: relative;
+}
+
+.hero .tagline {
+  font-size: 1.3rem;
+  margin-top: 10px;
+  z-index: 2;
+  position: relative;
+  opacity: 0.9;
+}
+
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
 /* ---------- Animated Hero Section ---------- */
 .hero {
   position: relative;
@@ -186,4 +229,5 @@ html {
   opacity: 1;
   transform: translateY(0);
 }
+
 
