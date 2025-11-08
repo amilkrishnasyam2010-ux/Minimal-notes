@@ -84,9 +84,21 @@
       });
     });
   </script>
+<script>
+  // Fade-in animation when scrolling
+  const elements = document.querySelectorAll('.feature-card');
+  window.addEventListener('scroll', () => {
+    elements.forEach(el => {
+      const pos = el.getBoundingClientRect().top;
+      if (pos < window.innerHeight - 50) el.classList.add('visible');
+    });
+  });
+</script>
+  
 </body>
 </html>
   
 </html>
+
 
 
