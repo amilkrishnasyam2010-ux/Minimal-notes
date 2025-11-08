@@ -11,6 +11,27 @@ function signupUser() {
   alert("Account created successfully!");
   showLogin();
 }
+// ---------- VISUAL EFFECTS ----------
+function fadeIn(el) {
+  el.style.opacity = 0;
+  el.classList.remove('hidden');
+  setTimeout(() => el.style.transition = 'opacity 0.6s', 10);
+  setTimeout(() => el.style.opacity = 1, 50);
+}
+
+// ---------- AUTH SYSTEM ----------
+function signupUser() {
+  const user = document.getElementById("signup-username").value.trim();
+  const pass = document.getElementById("signup-password").value.trim();
+
+  if (!user || !pass) return alert("Please fill in all fields!");
+
+  if (localStorage.getItem(user)) return alert("User already exists!");
+
+  localStorage.setItem(user, JSON.stringify({ password: pass, downloads: [] }));
+  alert("Account created successfully!");
+  showLogin();
+}
 
 function loginUser() {
   const user = document.getElementById("login-username").value.trim();
@@ -134,3 +155,4 @@ function showPDF(file) {
 function goBackDashboard() {
   window.location.href = "dashboard.html";
 }
+
