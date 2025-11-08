@@ -7,24 +7,52 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header>
+  <header class="hero">
     <h1>Minimal Notes</h1>
-    <p class="subheading">Making Notes Minimal 📘</p>
+    <p class="tagline">Making Notes Minimal 📘</p>
+    <a href="#features" class="scroll-btn">Explore Features ↓</a>
   </header>
 
-  <main>
-    <!-- Containers for each step -->
-    <div id="main-container" class="container"></div>
-    <div id="subject-container" class="container hidden"></div>
-    <div id="chapter-container" class="container hidden"></div>
-    <div id="pdf-container" class="container hidden"></div>
-  </main>
+  <section id="features" class="features">
+    <h2>Why Minimal Notes?</h2>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <h3>📚 Organized Learning</h3>
+        <p>Access Notes, Question Banks, and One Word sections for each subject.</p>
+      </div>
+      <div class="feature-card">
+        <h3>💾 Download Anytime</h3>
+        <p>Download your study materials and revisit them anytime with a unique code.</p>
+      </div>
+      <div class="feature-card">
+        <h3>🔐 Secure Access</h3>
+        <p>Every user has their own account, ensuring personalized study space.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="auth" class="auth-section">
+    <div class="auth-card" id="login-card">
+      <h2>Login</h2>
+      <input type="text" id="login-username" placeholder="Username" />
+      <input type="password" id="login-password" placeholder="Password" />
+      <button onclick="loginUser()">Login</button>
+      <p>Don't have an account? <a href="#" onclick="showSignup()">Sign up</a></p>
+    </div>
+
+    <div class="auth-card hidden" id="signup-card">
+      <h2>Sign Up</h2>
+      <input type="text" id="signup-username" placeholder="Choose a username" />
+      <input type="password" id="signup-password" placeholder="Create password" />
+      <button onclick="signupUser()">Sign Up</button>
+      <p>Already registered? <a href="#" onclick="showLogin()">Login</a></p>
+    </div>
+  </section>
 
   <footer>
     <p>© 2025 Minimal Notes | Built with ❤️ simplicity</p>
   </footer>
 
-  <script defer src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
-
