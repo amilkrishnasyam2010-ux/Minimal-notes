@@ -1,8 +1,7 @@
 // ------------------------
-// MINIMAL NOTES WEBSITE
+// MINIMAL NOTES WEBSITE (Simplified + Beautiful)
 // ------------------------
 
-// ✅ Ensure UI builds only after full page load
 window.addEventListener("DOMContentLoaded", () => {
   showMainOptions();
 });
@@ -22,7 +21,7 @@ const subjects = {
 const TYPES = ["notes", "questions", "oneword"];
 const DATA = {};
 
-// Auto-generate fake data (replace with real PDF links later)
+// Auto-generate data for each section
 TYPES.forEach(type => {
   DATA[type] = {};
   Object.keys(subjects).forEach(sub => {
@@ -31,34 +30,34 @@ TYPES.forEach(type => {
       DATA[type][sub].push({
         id: `${sub.toLowerCase()}_${type}_${i}`,
         title: `Chapter ${i}`,
-        pdf: `${sub.toLowerCase()}_${type}_${i}.pdf`,
-        code: `${sub.substring(0, 3).toUpperCase()}${i.toString().padStart(3, "0")}`
+        pdf: `${sub.toLowerCase()}_${type}_${i}.pdf`
       });
     }
   });
 });
 
 // ------------------------
-// STATE MANAGEMENT
+// STATE VARIABLES
 // ------------------------
 let selectedType = null;
 let selectedSubject = null;
-let selectedChapter = null;
 
-// Hide all containers
+// ------------------------
+// UTILITIES
+// ------------------------
 function resetContainers() {
   document.querySelectorAll(".container").forEach(c => c.classList.add("hidden"));
 }
 
 // ------------------------
-// STEP 1 - MAIN OPTIONS
+// STEP 1: HOME SELECTION
 // ------------------------
 function showMainOptions() {
   resetContainers();
   const container = document.getElementById("main-container");
 
   container.innerHTML = `
-    <h2>Choose a category</h2>
+    <h2>Select Type</h2>
     <button onclick="selectType('notes')">🗒️ Notes</button>
     <button onclick="selectType('questions')">❓ Question Bank</button>
     <button onclick="selectType('oneword')">🧩 One Word</button>
@@ -68,12 +67,11 @@ function showMainOptions() {
 }
 
 // ------------------------
-// STEP 2 - SUBJECT SELECTION
+// STEP 2: SUBJECTS
 // ------------------------
 function selectType(type) {
   selectedType = type;
   resetContainers();
-
   const container = document.getElementById("subject-container");
   container.innerHTML = `<h3>Select Subject</h3>`;
 
@@ -93,7 +91,7 @@ function selectType(type) {
 }
 
 // ------------------------
-// STEP 3 - CHAPTER SELECTION
+// STEP 3: CHAPTERS
 // ------------------------
 function showChapters(subject) {
   selectedSubject = subject;
@@ -105,7 +103,7 @@ function showChapters(subject) {
   DATA[selectedType][subject].forEach(ch => {
     const btn = document.createElement("button");
     btn.textContent = ch.title;
-    btn.onclick = () => openLogin(ch);
+    btn.onclick = () => showPDF(ch);
     container.appendChild(btn);
   });
 
@@ -118,48 +116,13 @@ function showChapters(subject) {
 }
 
 // ------------------------
-// STEP 4 - LOGIN
-// ------------------------
-function openLogin(chapter) {
-  selectedChapter = chapter;
-  resetContainers();
-  document.getElementById("login-container").classList.remove("hidden");
-}
-
-document.getElementById("loginBtn").addEventListener("click", () => {
-  const user = document.getElementById("username").value.trim();
-  const pass = document.getElementById("password").value.trim();
-
-  if (!user || !pass) {
-    alert("⚠️ Please enter both username and password");
-    return;
-  }
-
-  resetContainers();
-  document.getElementById("code-container").classList.remove("hidden");
-});
-
-// ------------------------
-// STEP 5 - CODE CHECK
-// ------------------------
-document.getElementById("codeSubmit").addEventListener("click", () => {
-  const enteredCode = document.getElementById("codeInput").value.trim();
-  if (enteredCode === selectedChapter.code) {
-    showPDF(selectedChapter);
-  } else {
-    alert("❌ Incorrect code");
-  }
-});
-
-// ------------------------
-// STEP 6 - PDF PREVIEW
+// STEP 4: PDF VIEW / DOWNLOAD
 // ------------------------
 function showPDF(chapter) {
   resetContainers();
   const container = document.getElementById("pdf-container");
   container.innerHTML = `
     <h3>${selectedSubject} - ${chapter.title}</h3>
-    <p>✅ Access Granted!</p>
     <a href="${chapter.pdf}" target="_blank">📄 Preview PDF</a>
     <a href="${chapter.pdf}" download>⬇️ Download PDF</a>
     <br><br>
