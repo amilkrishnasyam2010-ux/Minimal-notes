@@ -1,3 +1,9 @@
+// ------------------------
+// MINIMAL NOTES WEBSITE
+// ------------------------
+
+window.onload = () => showMainOptions();  // ✅ This ensures the first menu appears when the page loads
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -42,10 +48,11 @@
   <footer>
     <p>© 2025 Minimal Notes. Built with ❤️ simplicity.</p>
   </footer>
-
-  <script src="script.js"></script>
+  
+<script defer src="script.js"></script>
 </body>
 </html>
+
 
 
 
