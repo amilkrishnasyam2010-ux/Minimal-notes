@@ -133,3 +133,57 @@ body {
 button:hover {
   background: #0056b3;
 }
+/* ---------- Animated Hero Section ---------- */
+.hero {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #007bff, #004080);
+  background-size: 400% 400%;
+  animation: gradientMove 10s ease infinite;
+}
+
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Floating icons */
+.hero::before, .hero::after {
+  content: "🗒️ ❓ 🧩";
+  position: absolute;
+  font-size: 3rem;
+  opacity: 0.15;
+  animation: floatIcons 6s ease-in-out infinite;
+  left: 10%;
+  bottom: 20%;
+}
+
+.hero::after {
+  left: 80%;
+  bottom: 40%;
+  animation-delay: 3s;
+}
+
+@keyframes floatIcons {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+/* Smooth scroll */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Fade-in on scroll */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.8s ease;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
