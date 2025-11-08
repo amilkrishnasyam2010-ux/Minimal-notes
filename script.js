@@ -3,6 +3,7 @@
 // ------------------------
 
 const DATA = {
+  // 🗒️ NOTES SECTION
   notes: {
     Physics: [
       { id: 'phy1', title: 'Chapter 1', pdf: 'phy1.pdf', code: 'PHY001' },
@@ -52,24 +53,28 @@ const DATA = {
       { id: 'geo8', title: 'Chapter 8', pdf: 'geo8.pdf', code: 'GEO008' }
     ]
   },
-  questions: {
-    Physics: [],
-    Chemistry: [],
-    Biology: [],
-    History: [],
-    Geography: []
-  },
-  oneword: {
-    Physics: [],
-    Chemistry: [],
-    Biology: [],
-    History: [],
-    Geography: []
-  }
+
+  // ❓ QUESTION BANK SECTION
+  questions: {},
+
+  // 🧩 ONE WORD SECTION
+  oneword: {}
 };
 
+// 🔁 Clone Notes structure for Question Bank and One Word
+['questions', 'oneword'].forEach(type => {
+  DATA[type] = {};
+  for (let subject in DATA.notes) {
+    DATA[type][subject] = DATA.notes[subject].map(ch => ({
+      ...ch,
+      pdf: `${subject.toLowerCase()}_${type}_${ch.id}.pdf`,
+      code: `${ch.code}-${type.toUpperCase()}`
+    }));
+  }
+});
+
 // ------------------------
-// Interface Logic
+// INTERFACE LOGIC
 // ------------------------
 
 let selectedType = null;
@@ -165,3 +170,4 @@ function showPDF(chapter) {
   `;
   container.classList.remove('hidden');
 }
+
