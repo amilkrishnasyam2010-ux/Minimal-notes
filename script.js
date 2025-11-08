@@ -1,31 +1,62 @@
-// Simulated database
+// Minimal Notes Data Configuration
 const DATA = {
   notes: {
     Physics: [
-      { id: 'ch1', title: 'Chapter 1: Motion', pdf: 'motion.pdf', code: 'PHY123' },
-      { id: 'ch2', title: 'Chapter 2: Energy', pdf: 'energy.pdf', code: 'PHY456' }
+      { id: 'phy1', title: 'Chapter 1', pdf: 'phy1.pdf', code: 'PHY001' },
+      { id: 'phy2', title: 'Chapter 2', pdf: 'phy2.pdf', code: 'PHY002' },
+      { id: 'phy3', title: 'Chapter 3', pdf: 'phy3.pdf', code: 'PHY003' },
+      { id: 'phy4', title: 'Chapter 4', pdf: 'phy4.pdf', code: 'PHY004' },
+      { id: 'phy5', title: 'Chapter 5', pdf: 'phy5.pdf', code: 'PHY005' },
+      { id: 'phy6', title: 'Chapter 6', pdf: 'phy6.pdf', code: 'PHY006' },
+      { id: 'phy7', title: 'Chapter 7', pdf: 'phy7.pdf', code: 'PHY007' }
     ],
     Chemistry: [
-      { id: 'ch1', title: 'Chapter 1: Atomic Structure', pdf: 'atomic.pdf', code: 'CHEM789' }
+      { id: 'chem1', title: 'Chapter 1', pdf: 'chem1.pdf', code: 'CHEM001' },
+      { id: 'chem2', title: 'Chapter 2', pdf: 'chem2.pdf', code: 'CHEM002' },
+      { id: 'chem3', title: 'Chapter 3', pdf: 'chem3.pdf', code: 'CHEM003' },
+      { id: 'chem4', title: 'Chapter 4', pdf: 'chem4.pdf', code: 'CHEM004' },
+      { id: 'chem5', title: 'Chapter 5', pdf: 'chem5.pdf', code: 'CHEM005' },
+      { id: 'chem6', title: 'Chapter 6', pdf: 'chem6.pdf', code: 'CHEM006' },
+      { id: 'chem7', title: 'Chapter 7', pdf: 'chem7.pdf', code: 'CHEM007' }
+    ],
+    Biology: [
+      { id: 'bio1', title: 'Chapter 1', pdf: 'bio1.pdf', code: 'BIO001' },
+      { id: 'bio2', title: 'Chapter 2', pdf: 'bio2.pdf', code: 'BIO002' },
+      { id: 'bio3', title: 'Chapter 3', pdf: 'bio3.pdf', code: 'BIO003' },
+      { id: 'bio4', title: 'Chapter 4', pdf: 'bio4.pdf', code: 'BIO004' },
+      { id: 'bio5', title: 'Chapter 5', pdf: 'bio5.pdf', code: 'BIO005' },
+      { id: 'bio6', title: 'Chapter 6', pdf: 'bio6.pdf', code: 'BIO006' }
+    ],
+    History: [
+      { id: 'his1', title: 'Chapter 1', pdf: 'his1.pdf', code: 'HIS001' },
+      { id: 'his2', title: 'Chapter 2', pdf: 'his2.pdf', code: 'HIS002' },
+      { id: 'his3', title: 'Chapter 3', pdf: 'his3.pdf', code: 'HIS003' },
+      { id: 'his4', title: 'Chapter 4', pdf: 'his4.pdf', code: 'HIS004' },
+      { id: 'his5', title: 'Chapter 5', pdf: 'his5.pdf', code: 'HIS005' },
+      { id: 'his6', title: 'Chapter 6', pdf: 'his6.pdf', code: 'HIS006' },
+      { id: 'his7', title: 'Chapter 7', pdf: 'HIS007.pdf', code: 'HIS007' },
+      { id: 'his8', title: 'Chapter 8', pdf: 'his8.pdf', code: 'HIS008' },
+      { id: 'his9', title: 'Chapter 9', pdf: 'his9.pdf', code: 'HIS009' }
+    ],
+    Geography: [
+      { id: 'geo1', title: 'Chapter 1', pdf: 'geo1.pdf', code: 'GEO001' },
+      { id: 'geo2', title: 'Chapter 2', pdf: 'geo2.pdf', code: 'GEO002' },
+      { id: 'geo3', title: 'Chapter 3', pdf: 'geo3.pdf', code: 'GEO003' },
+      { id: 'geo4', title: 'Chapter 4', pdf: 'geo4.pdf', code: 'GEO004' },
+      { id: 'geo5', title: 'Chapter 5', pdf: 'geo5.pdf', code: 'GEO005' },
+      { id: 'geo6', title: 'Chapter 6', pdf: 'geo6.pdf', code: 'GEO006' },
+      { id: 'geo7', title: 'Chapter 7', pdf: 'geo7.pdf', code: 'GEO007' },
+      { id: 'geo8', title: 'Chapter 8', pdf: 'geo8.pdf', code: 'GEO008' }
     ]
-  },
-  questions: {
-    Physics: [{ id: 'q1', title: 'Motion Question Bank', pdf: 'motion_q.pdf', code: 'PQ001' }]
-  },
-  oneword: {
-    Chemistry: [{ id: 'o1', title: 'One Word: Chemistry', pdf: 'oneword_chem.pdf', code: 'ONE111' }]
   }
 };
 
-let selectedType, selectedSubject, selectedChapter;
+let selectedType = 'notes';
+let selectedSubject;
+let selectedChapter;
 
-// Option selection
-document.querySelectorAll('.option').forEach(btn => {
-  btn.addEventListener('click', () => {
-    selectedType = btn.dataset.type;
-    showSubjects();
-  });
-});
+// Show subjects when the page loads
+window.onload = () => showSubjects();
 
 function showSubjects() {
   const subjects = Object.keys(DATA[selectedType]);
