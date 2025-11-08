@@ -4,42 +4,45 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Minimal Notes</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <header>
     <h1>Minimal Notes</h1>
-    <p class="subtitle">Making notes minimal✍️</p>
+    <p class="subheading">Making Notes Minimal 📘</p>
   </header>
 
-  <main id="main">
-    <div id="menu">
-      <button class="option" data-type="notes">Notes</button>
-      <button class="option" data-type="questions">Question Banks</button>
-      <button class="option" data-type="oneword">One Word</button>
-    </div>
+  <!-- ✅ Main Selection -->
+  <main>
+    <div id="main-container" class="container"></div>
+    <div id="subject-container" class="container hidden"></div>
+    <div id="chapter-container" class="container hidden"></div>
 
-    <div id="subject-container" class="hidden"></div>
-    <div id="chapter-container" class="hidden"></div>
-    <div id="login-container" class="hidden">
+    <!-- ✅ Login -->
+    <div id="login-container" class="container hidden">
       <h3>Login</h3>
-      <input type="text" id="username" placeholder="Username" />
-      <input type="password" id="password" placeholder="Password" />
+      <input type="text" id="username" placeholder="Username">
+      <input type="password" id="password" placeholder="Password">
       <button id="loginBtn">Login</button>
     </div>
-    <div id="code-container" class="hidden">
+
+    <!-- ✅ Code entry -->
+    <div id="code-container" class="container hidden">
       <h3>Enter Access Code</h3>
-      <input type="text" id="codeInput" placeholder="Enter code" />
+      <input type="text" id="codeInput" placeholder="Enter code">
       <button id="codeSubmit">Submit</button>
     </div>
-    <div id="pdf-container" class="hidden"></div>
+
+    <!-- ✅ PDF display -->
+    <div id="pdf-container" class="container hidden"></div>
   </main>
 
   <footer>
-    <p>© 2025 Minimal Notes. Keeping things simple.</p>
+    <p>© 2025 Minimal Notes. Built with ❤️ simplicity.</p>
   </footer>
 
-  <script src="script.js"></script>
+  <!-- ✅ Load script at the end -->
+  <script defer src="script.js"></script>
 </body>
 </html>
 
