@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard - Minimal Notes</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="small-header">
+    <h1>Welcome, <span id="user-name"></span> 👋</h1>
+    <button onclick="logoutUser()" class="logout-btn">Logout</button>
+  </header>
+
+  <main class="dashboard">
+    <section>
+      <h2>Your Downloads</h2>
+      <ul id="downloaded-list">No notes downloaded yet.</ul>
+    </section>
+
+    <section>
+      <h2>Explore</h2>
+      <div class="dashboard-btns">
+        <button onclick="goTo('notes')">🗒️ Notes</button>
+        <button onclick="goTo('questions')">❓ Question Bank</button>
+        <button onclick="goTo('oneword')">🧩 One Word</button>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 Minimal Notes</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
