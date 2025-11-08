@@ -1,130 +1,136 @@
-// ------------------------
-// MINIMAL NOTES — clean functional version
-// ------------------------
+// ---------- AUTH SYSTEM ----------
+function signupUser() {
+  const user = document.getElementById("signup-username").value.trim();
+  const pass = document.getElementById("signup-password").value.trim();
 
-window.addEventListener("DOMContentLoaded", () => {
-  showMainOptions();
-});
+  if (!user || !pass) return alert("Please fill in all fields!");
 
-// ------------------------
-// Data structure
-// ------------------------
+  if (localStorage.getItem(user)) return alert("User already exists!");
+
+  localStorage.setItem(user, JSON.stringify({ password: pass, downloads: [] }));
+  alert("Account created successfully!");
+  showLogin();
+}
+
+function loginUser() {
+  const user = document.getElementById("login-username").value.trim();
+  const pass = document.getElementById("login-password").value.trim();
+
+  const saved = localStorage.getItem(user);
+  if (!saved) return alert("User not found!");
+
+  const data = JSON.parse(saved);
+  if (data.password !== pass) return alert("Wrong password!");
+
+  localStorage.setItem("loggedIn", user);
+  window.location.href = "dashboard.html";
+}
+
+function logoutUser() {
+  localStorage.removeItem("loggedIn");
+  window.location.href = "index.html";
+}
+
+function showSignup() {
+  document.getElementById("login-card").classList.add("hidden");
+  document.getElementById("signup-card").classList.remove("hidden");
+}
+
+function showLogin() {
+  document.getElementById("signup-card").classList.add("hidden");
+  document.getElementById("login-card").classList.remove("hidden");
+}
+
+// ---------- DASHBOARD ----------
+if (window.location.pathname.endsWith("dashboard.html")) {
+  const user = localStorage.getItem("loggedIn");
+  if (!user) window.location.href = "index.html";
+  else {
+    document.getElementById("user-name").innerText = user;
+    const data = JSON.parse(localStorage.getItem(user));
+    const list = document.getElementById("downloaded-list");
+
+    if (data.downloads.length > 0)
+      list.innerHTML = data.downloads.map(f => `<li>${f}</li>`).join("");
+  }
+}
+
+function goTo(type) {
+  localStorage.setItem("section", type);
+  window.location.href = "notes.html";
+}
+
+// ---------- NOTES SYSTEM ----------
 const subjects = {
   Physics: 7,
   Chemistry: 7,
   Biology: 6,
-  History: 9,
-  Geography: 8
+  Geography: 8,
+  History: 9
 };
 
-const TYPES = ["notes", "questions", "oneword"];
-const DATA = {};
+if (window.location.pathname.endsWith("notes.html")) {
+  const section = localStorage.getItem("section");
+  document.getElementById("section-title").innerText =
+    section.charAt(0).toUpperCase() + section.slice(1);
 
-// Auto-generate chapter data for each subject/type
-TYPES.forEach(type => {
-  DATA[type] = {};
+  const subjectContainer = document.getElementById("subject-container");
   Object.keys(subjects).forEach(sub => {
-    DATA[type][sub] = [];
-    for (let i = 1; i <= subjects[sub]; i++) {
-      DATA[type][sub].push({
-        title: `Chapter ${i}`,
-        pdf: `${sub.toLowerCase()}_${type}_${i}.pdf`
-      });
-    }
-  });
-});
-
-// ------------------------
-// App State
-// ------------------------
-let selectedType = null;
-let selectedSubject = null;
-
-// Hide all containers
-function resetContainers() {
-  document.querySelectorAll(".container").forEach(c => c.classList.add("hidden"));
-}
-
-// ------------------------
-// Step 1 — Home screen
-// ------------------------
-function showMainOptions() {
-  resetContainers();
-  const container = document.getElementById("main-container");
-
-  container.innerHTML = `
-    <h2>Choose a Section</h2>
-    <button onclick="selectType('notes')">🗒️ Notes</button>
-    <button onclick="selectType('questions')">❓ Question Bank</button>
-    <button onclick="selectType('oneword')">🧩 One Word</button>
-  `;
-
-  container.classList.remove("hidden");
-}
-
-// ------------------------
-// Step 2 — Subject Selection
-// ------------------------
-function selectType(type) {
-  selectedType = type;
-  resetContainers();
-
-  const container = document.getElementById("subject-container");
-  container.innerHTML = `<h3>Select Subject</h3>`;
-
-  Object.keys(DATA[selectedType]).forEach(sub => {
     const btn = document.createElement("button");
     btn.textContent = sub;
     btn.onclick = () => showChapters(sub);
-    container.appendChild(btn);
+    subjectContainer.appendChild(btn);
   });
-
-  const back = document.createElement("button");
-  back.textContent = "⬅️ Back";
-  back.onclick = showMainOptions;
-  container.appendChild(back);
-
-  container.classList.remove("hidden");
 }
 
-// ------------------------
-// Step 3 — Chapter Selection
-// ------------------------
 function showChapters(subject) {
-  selectedSubject = subject;
-  resetContainers();
-
-  const container = document.getElementById("chapter-container");
-  container.innerHTML = `<h3>${subject} - Select Chapter</h3>`;
-
-  DATA[selectedType][subject].forEach(ch => {
+  document.getElementById("subject-container").classList.add("hidden");
+  const chapterDiv = document.getElementById("chapter-container");
+  chapterDiv.innerHTML = `<h3>${subject} - Select Chapter</h3>`;
+  for (let i = 1; i <= subjects[subject]; i++) {
     const btn = document.createElement("button");
-    btn.textContent = ch.title;
-    btn.onclick = () => showPDF(ch);
-    container.appendChild(btn);
-  });
-
-  const back = document.createElement("button");
-  back.textContent = "⬅️ Back";
-  back.onclick = () => selectType(selectedType);
-  container.appendChild(back);
-
-  container.classList.remove("hidden");
+    btn.textContent = `Chapter ${i}`;
+    btn.onclick = () => askCode(`${subject}_${i}`);
+    chapterDiv.appendChild(btn);
+  }
+  chapterDiv.classList.remove("hidden");
 }
 
-// ------------------------
-// Step 4 — PDF Preview + Download
-// ------------------------
-function showPDF(chapter) {
-  resetContainers();
+function askCode(file) {
+  localStorage.setItem("pendingFile", file);
+  document.getElementById("chapter-container").classList.add("hidden");
+  document.getElementById("code-container").classList.remove("hidden");
+}
 
-  const container = document.getElementById("pdf-container");
-  container.innerHTML = `
-    <h3>${selectedSubject} - ${chapter.title}</h3>
-    <a href="${chapter.pdf}" target="_blank">📄 Preview PDF</a>
-    <a href="${chapter.pdf}" download>⬇️ Download PDF</a>
-    <br><br>
-    <button onclick="showMainOptions()">🏠 Back to Home</button>
+function verifyCode() {
+  const entered = document.getElementById("code-input").value.trim();
+  const file = localStorage.getItem("pendingFile");
+  const code = "MN" + btoa(file).slice(0, 4).toUpperCase(); // pseudo-code
+
+  if (entered !== code) return alert("Invalid Code!");
+
+  showPDF(file);
+}
+
+function showPDF(file) {
+  document.getElementById("code-container").classList.add("hidden");
+  const pdfDiv = document.getElementById("pdf-container");
+  pdfDiv.innerHTML = `
+    <h3>Access Granted!</h3>
+    <a href="pdfs/${file}.pdf" target="_blank">📄 Preview PDF</a>
+    <a href="pdfs/${file}.pdf" download>⬇️ Download PDF</a>
   `;
-  container.classList.remove("hidden");
+  pdfDiv.classList.remove("hidden");
+
+  // Save to user downloads
+  const user = localStorage.getItem("loggedIn");
+  const data = JSON.parse(localStorage.getItem(user));
+  if (!data.downloads.includes(file)) {
+    data.downloads.push(file);
+    localStorage.setItem(user, JSON.stringify(data));
+  }
+}
+
+function goBackDashboard() {
+  window.location.href = "dashboard.html";
 }
