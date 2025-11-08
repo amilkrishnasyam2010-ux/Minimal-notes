@@ -1,4 +1,7 @@
-// Minimal Notes Data Configuration
+// ------------------------
+// MINIMAL NOTES WEBSITE
+// ------------------------
+
 const DATA = {
   notes: {
     Physics: [
@@ -34,7 +37,7 @@ const DATA = {
       { id: 'his4', title: 'Chapter 4', pdf: 'his4.pdf', code: 'HIS004' },
       { id: 'his5', title: 'Chapter 5', pdf: 'his5.pdf', code: 'HIS005' },
       { id: 'his6', title: 'Chapter 6', pdf: 'his6.pdf', code: 'HIS006' },
-      { id: 'his7', title: 'Chapter 7', pdf: 'HIS007.pdf', code: 'HIS007' },
+      { id: 'his7', title: 'Chapter 7', pdf: 'his7.pdf', code: 'HIS007' },
       { id: 'his8', title: 'Chapter 8', pdf: 'his8.pdf', code: 'HIS008' },
       { id: 'his9', title: 'Chapter 9', pdf: 'his9.pdf', code: 'HIS009' }
     ],
@@ -48,15 +51,54 @@ const DATA = {
       { id: 'geo7', title: 'Chapter 7', pdf: 'geo7.pdf', code: 'GEO007' },
       { id: 'geo8', title: 'Chapter 8', pdf: 'geo8.pdf', code: 'GEO008' }
     ]
+  },
+  questions: {
+    Physics: [],
+    Chemistry: [],
+    Biology: [],
+    History: [],
+    Geography: []
+  },
+  oneword: {
+    Physics: [],
+    Chemistry: [],
+    Biology: [],
+    History: [],
+    Geography: []
   }
 };
 
-let selectedType = 'notes';
-let selectedSubject;
-let selectedChapter;
+// ------------------------
+// Interface Logic
+// ------------------------
 
-// Show subjects when the page loads
-window.onload = () => showSubjects();
+let selectedType = null;
+let selectedSubject = null;
+let selectedChapter = null;
+
+window.onload = () => showMainOptions();
+
+function resetContainers() {
+  document.querySelectorAll('.container').forEach(c => c.classList.add('hidden'));
+}
+
+function showMainOptions() {
+  resetContainers();
+  const container = document.getElementById('main-container');
+  container.innerHTML = `
+    <h2>Select Type</h2>
+    <button onclick="selectType('notes')">🗒️ Notes</button>
+    <button onclick="selectType('questions')">❓ Question Bank</button>
+    <button onclick="selectType('oneword')">🧩 One Word</button>
+  `;
+  container.classList.remove('hidden');
+}
+
+function selectType(type) {
+  selectedType = type;
+  resetContainers();
+  showSubjects();
+}
 
 function showSubjects() {
   const subjects = Object.keys(DATA[selectedType]);
@@ -73,6 +115,7 @@ function showSubjects() {
 
 function showChapters(subject) {
   selectedSubject = subject;
+  resetContainers();
   const container = document.getElementById('chapter-container');
   container.innerHTML = `<h3>Select Chapter</h3>`;
   DATA[selectedType][subject].forEach(ch => {
@@ -86,6 +129,7 @@ function showChapters(subject) {
 
 function openLogin(chapter) {
   selectedChapter = chapter;
+  resetContainers();
   document.getElementById('login-container').classList.remove('hidden');
 }
 
@@ -93,7 +137,7 @@ document.getElementById('loginBtn').addEventListener('click', () => {
   const user = document.getElementById('username').value;
   const pass = document.getElementById('password').value;
   if (user && pass) {
-    document.getElementById('login-container').classList.add('hidden');
+    resetContainers();
     document.getElementById('code-container').classList.remove('hidden');
   } else {
     alert('Please enter both username and password.');
@@ -110,14 +154,14 @@ document.getElementById('codeSubmit').addEventListener('click', () => {
 });
 
 function showPDF(chapter) {
-  document.getElementById('code-container').classList.add('hidden');
+  resetContainers();
   const container = document.getElementById('pdf-container');
   container.innerHTML = `
     <h3>Available PDFs</h3>
     <a href="${chapter.pdf}" target="_blank">📄 Preview ${chapter.title}</a>
     <a href="${chapter.pdf}" download>⬇️ Download ${chapter.title}</a>
+    <br><br>
+    <button onclick="showMainOptions()">🏠 Back to Home</button>
   `;
   container.classList.remove('hidden');
 }
-
-
