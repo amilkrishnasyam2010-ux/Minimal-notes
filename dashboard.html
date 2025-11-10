@@ -6,20 +6,25 @@
   <title>Dashboard - Minimal Notes</title>
   <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
+  <!-- Header -->
   <header class="small-header">
     <h1>Welcome, <span id="user-name"></span> 👋</h1>
-    <button onclick="logoutUser()" class="logout-btn">Logout</button>
+    <button onclick="logoutUser()" class="logout-btn">🚪 Logout</button>
   </header>
 
+  <!-- Main Dashboard -->
   <main class="dashboard">
-    <section>
-      <h2>Your Downloads</h2>
+    <!-- Section: Downloads -->
+    <section class="fade-in">
+      <h2>📥 Your Downloads</h2>
       <ul id="downloaded-list">No notes downloaded yet.</ul>
     </section>
 
-    <section>
-      <h2>Explore</h2>
+    <!-- Section: Explore Options -->
+    <section class="fade-in">
+      <h2>📚 Explore Resources</h2>
       <div class="dashboard-btns">
         <button onclick="goTo('notes')">🗒️ Notes</button>
         <button onclick="goTo('questions')">❓ Question Bank</button>
@@ -28,10 +33,13 @@
     </section>
   </main>
 
+  <!-- Footer -->
   <footer>
-    <p>© 2025 Minimal Notes</p>
+    <p>© 2025 Minimal Notes | Simplifying Learning</p>
   </footer>
 
+  <!-- Script -->
   <script src="script.js"></script>
 </body>
 </html>
+
