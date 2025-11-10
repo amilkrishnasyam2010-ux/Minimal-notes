@@ -3,26 +3,41 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Select Notes - Minimal Notes</title>
+  <title>Notes Selection - Minimal Notes</title>
   <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
+  <!-- Header -->
   <header class="small-header">
-    <h1 id="section-title"></h1>
+    <h1 id="section-title">Notes</h1>
     <button onclick="goBackDashboard()" class="logout-btn">🏠 Dashboard</button>
   </header>
 
+  <!-- Main Content -->
   <main class="notes-container">
-    <div id="subject-container"></div>
-    <div id="chapter-container" class="hidden"></div>
-    <div id="code-container" class="hidden">
+    <!-- Step 1: Choose Subject -->
+    <div id="subject-container" class="fade-in">
+      <h2>Select a Subject</h2>
+      <!-- Buttons will be added dynamically via JS -->
+    </div>
+
+    <!-- Step 2: Choose Chapter -->
+    <div id="chapter-container" class="hidden fade-in"></div>
+
+    <!-- Step 3: Enter Access Code -->
+    <div id="code-container" class="hidden fade-in">
       <h3>Enter Access Code</h3>
       <input type="text" id="code-input" placeholder="Enter your code" />
       <button onclick="verifyCode()">Submit</button>
     </div>
-    <div id="pdf-container" class="hidden"></div>
+
+    <!-- Step 4: View/Download PDF -->
+    <div id="pdf-container" class="hidden fade-in"></div>
   </main>
 
+  <!-- Script -->
   <script src="script.js"></script>
 </body>
 </html>
+
