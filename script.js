@@ -90,6 +90,11 @@ const subjects = {
   History: 9,
   Maths_QB: 10   // Maths only for Question Bank (10 chapters — change number as needed)
 };
+// FREE Question Bank chapters (no code required)
+const freeFiles = [
+  "Maths_6_QB",
+  "Maths_7_QB"
+];
 
 if (window.location.pathname.endsWith("notes.html")) {
   const section = localStorage.getItem("section");
@@ -120,9 +125,18 @@ function showChapters(subject) {
 
 function askCode(file) {
   localStorage.setItem("pendingFile", file);
+
+  // If file is free → skip code screen
+  if (freeFiles.includes(file)) {
+    showPDF(file);
+    return;
+  }
+
+  // Otherwise show code entry
   document.getElementById("chapter-container").classList.add("hidden");
   document.getElementById("code-container").classList.remove("hidden");
 }
+
 
 function verifyCode() {
   const entered = document.getElementById("code-input").value.trim();
@@ -156,5 +170,6 @@ function showPDF(file) {
 function goBackDashboard() {
   window.location.href = "dashboard.html";
 }
+
 
 
