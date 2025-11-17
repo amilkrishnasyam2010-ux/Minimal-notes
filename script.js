@@ -87,7 +87,8 @@ const subjects = {
   Chemistry: 7,
   Biology: 6,
   Geography: 8,
-  History: 9
+  History: 9,
+  Maths_QB: 10   // Maths only for Question Bank (10 chapters — change number as needed)
 };
 
 if (window.location.pathname.endsWith("notes.html")) {
@@ -155,4 +156,5 @@ function showPDF(file) {
 function goBackDashboard() {
   window.location.href = "dashboard.html";
 }
+
 
