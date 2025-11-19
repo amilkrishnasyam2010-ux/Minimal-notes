@@ -101,13 +101,22 @@ if (window.location.pathname.endsWith("notes.html")) {
   document.getElementById("section-title").innerText =
     section.charAt(0).toUpperCase() + section.slice(1);
 
-  const subjectContainer = document.getElementById("subject-container");
-  Object.keys(subjects).forEach(sub => {
-    const btn = document.createElement("button");
-    btn.textContent = sub;
-    btn.onclick = () => showChapters(sub);
-    subjectContainer.appendChild(btn);
-  });
+ const section = localStorage.getItem("section");
+
+Object.keys(subjects).forEach(sub => {
+  
+  // Maths should appear ONLY in Question Bank
+  if (sub === "Maths_QB" && section !== "questions") return;
+
+  // Display name (Maths_QB → Maths)
+  const displayName = sub === "Maths_QB" ? "Maths" : sub;
+
+  const btn = document.createElement("button");
+  btn.textContent = displayName;
+  btn.onclick = () => showChapters(sub);
+  subjectContainer.appendChild(btn);
+});
+
 }
 
 function showChapters(subject) {
@@ -170,6 +179,7 @@ function showPDF(file) {
 function goBackDashboard() {
   window.location.href = "dashboard.html";
 }
+
 
 
 
