@@ -135,13 +135,13 @@ function showChapters(subject) {
 function askCode(file) {
   localStorage.setItem("pendingFile", file);
 
-  // If file is free → skip code screen
+  // If this file is free → skip code entry
   if (freeFiles.includes(file)) {
     showPDF(file);
     return;
   }
 
-  // Otherwise show code entry
+  // Otherwise show code input
   document.getElementById("chapter-container").classList.add("hidden");
   document.getElementById("code-container").classList.remove("hidden");
 }
@@ -179,6 +179,7 @@ function showPDF(file) {
 function goBackDashboard() {
   window.location.href = "dashboard.html";
 }
+
 
 
 
