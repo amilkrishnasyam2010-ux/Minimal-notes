@@ -88,7 +88,7 @@ const subjects = {
   Biology: 6,
   Geography: 8,
   History: 9,
-  Maths_QB: 10   // Maths only for Question Bank (10 chapters — change number as needed)
+  Maths: 10   // Maths only for Question Bank (10 chapters — change number as needed)
 };
 // FREE Question Bank chapters (no code required)
 const freeFiles = [
@@ -170,6 +170,7 @@ function showPDF(file) {
 function goBackDashboard() {
   window.location.href = "dashboard.html";
 }
+
 
 
 
