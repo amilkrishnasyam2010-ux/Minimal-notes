@@ -1,23 +1,20 @@
-// ---------- AUTH SYSTEM ----------
-function signupUser() {
-  const user = document.getElementById("signup-username").value.trim();
-  const pass = document.getElementById("signup-password").value.trim();
+// ---------- SUBJECTS ----------
+const subjects = {
+  Physics: 7,
+  Chemistry: 7,
+  Biology: 6,
+  Geography: 8,
+  History: 9,
+  Maths_QB: 10    // Maths ONLY for Question Bank
+};
 
-  if (!user || !pass) return alert("Please fill in all fields!");
-
-  if (localStorage.getItem(user)) return alert("User already exists!");
-
-  localStorage.setItem(user, JSON.stringify({ password: pass, downloads: [] }));
-  alert("Account created successfully!");
-  showLogin();
-}
-// ---------- VISUAL EFFECTS ----------
-function fadeIn(el) {
-  el.style.opacity = 0;
-  el.classList.remove('hidden');
-  setTimeout(() => el.style.transition = 'opacity 0.6s', 10);
-  setTimeout(() => el.style.opacity = 1, 50);
-}
+// ---------- FREE ACCESS FILES ----------
+const freeFiles = [
+  "Maths_6_QB",
+  "Maths_7_QB",
+  "History_4_QB",
+  "Physics_5_QB"
+];
 
 // ---------- AUTH SYSTEM ----------
 function signupUser() {
@@ -25,7 +22,6 @@ function signupUser() {
   const pass = document.getElementById("signup-password").value.trim();
 
   if (!user || !pass) return alert("Please fill in all fields!");
-
   if (localStorage.getItem(user)) return alert("User already exists!");
 
   localStorage.setItem(user, JSON.stringify({ password: pass, downloads: [] }));
@@ -82,51 +78,50 @@ function goTo(type) {
 }
 
 // ---------- NOTES SYSTEM ----------
-const subjects = {
-  Physics: 7,
-  Chemistry: 7,
-  Biology: 6,
-  Geography: 8,
-  History: 9,
-  Maths: 10   // Maths only for Question Bank (10 chapters — change number as needed)
-};
-// FREE Question Bank chapters (no code required)
-const freeFiles = [
-  "Maths_6_QB",
-  "Maths_7_QB"
-];
-
 if (window.location.pathname.endsWith("notes.html")) {
   const section = localStorage.getItem("section");
   document.getElementById("section-title").innerText =
     section.charAt(0).toUpperCase() + section.slice(1);
 
- const section = localStorage.getItem("section");
+  const subjectContainer = document.getElementById("subject-container");
 
-Object.keys(subjects).forEach(sub => {
-  
-  // Maths should appear ONLY in Question Bank
-  if (sub === "Maths_QB" && section !== "questions") return;
+  Object.keys(subjects).forEach(sub => {
+    // Show Maths only in Question Bank
+    if (sub === "Maths_QB" && section !== "questions") return;
 
-  // Display name (Maths_QB → Maths)
-  const displayName = sub === "Maths_QB" ? "Maths" : sub;
+    // Display name (Maths_QB → Maths)
+    const displayName = sub === "Maths_QB" ? "Maths" : sub;
 
-  const btn = document.createElement("button");
-  btn.textContent = displayName;
-  btn.onclick = () => showChapters(sub);
-  subjectContainer.appendChild(btn);
-});
-
+    const btn = document.createElement("button");
+    btn.textContent = displayName;
+    btn.onclick = () => showChapters(sub);
+    subjectContainer.appendChild(btn);
+  });
 }
 
 function showChapters(subject) {
   document.getElementById("subject-container").classList.add("hidden");
   const chapterDiv = document.getElementById("chapter-container");
-  chapterDiv.innerHTML = `<h3>${subject} - Select Chapter</h3>`;
+  chapterDiv.innerHTML = `<h3>${subject === "Maths_QB" ? "Maths" : subject} - Select Chapter</h3>`;
+
+  const section = localStorage.getItem("section");
+
   for (let i = 1; i <= subjects[subject]; i++) {
     const btn = document.createElement("button");
+
+    // Build fileName
+    let fileName;
+
+    if (subject === "Maths_QB") {
+      fileName = `Maths_${i}_QB`;        // Maths only QB
+    } else {
+      fileName = `${subject}_${i}`;
+      if (section === "questions") fileName += "_QB";
+      if (section === "oneword") fileName += "_OW";
+    }
+
     btn.textContent = `Chapter ${i}`;
-    btn.onclick = () => askCode(`${subject}_${i}`);
+    btn.onclick = () => askCode(fileName);
     chapterDiv.appendChild(btn);
   }
   chapterDiv.classList.remove("hidden");
@@ -135,31 +130,29 @@ function showChapters(subject) {
 function askCode(file) {
   localStorage.setItem("pendingFile", file);
 
-  // If this file is free → skip code entry
+  // FREE CHAPTER → Skip code screen
   if (freeFiles.includes(file)) {
     showPDF(file);
     return;
   }
 
-  // Otherwise show code input
   document.getElementById("chapter-container").classList.add("hidden");
   document.getElementById("code-container").classList.remove("hidden");
 }
 
-
 function verifyCode() {
   const entered = document.getElementById("code-input").value.trim();
   const file = localStorage.getItem("pendingFile");
-  const code = "MN" + btoa(file).slice(0, 4).toUpperCase(); // pseudo-code
+  const code = "MN" + btoa(file).slice(0, 4).toUpperCase(); // auto-code
 
   if (entered !== code) return alert("Invalid Code!");
-
   showPDF(file);
 }
 
 function showPDF(file) {
   document.getElementById("code-container").classList.add("hidden");
   const pdfDiv = document.getElementById("pdf-container");
+
   pdfDiv.innerHTML = `
     <h3>Access Granted!</h3>
     <a href="pdfs/${file}.pdf" target="_blank">📄 Preview PDF</a>
@@ -167,9 +160,10 @@ function showPDF(file) {
   `;
   pdfDiv.classList.remove("hidden");
 
-  // Save to user downloads
+  // Save to downloads
   const user = localStorage.getItem("loggedIn");
   const data = JSON.parse(localStorage.getItem(user));
+
   if (!data.downloads.includes(file)) {
     data.downloads.push(file);
     localStorage.setItem(user, JSON.stringify(data));
@@ -179,9 +173,3 @@ function showPDF(file) {
 function goBackDashboard() {
   window.location.href = "dashboard.html";
 }
-
-
-
-
-
-
