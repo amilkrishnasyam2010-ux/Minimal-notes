@@ -20,10 +20,11 @@ const freeFiles = [
 
 // ---------- AUTH SYSTEM ----------
 function signupUser() {
-  const user = document.getElementById("signup-username").value.trim();
+  let user = document.getElementById("signup-username").value.trim().toLowerCase();
   const pass = document.getElementById("signup-password").value.trim();
 
   if (!user || !pass) return alert("Please fill in all fields!");
+
   if (localStorage.getItem(user)) return alert("User already exists!");
 
   localStorage.setItem(user, JSON.stringify({ password: pass, downloads: [] }));
@@ -31,8 +32,9 @@ function signupUser() {
   showLogin();
 }
 
+
 function loginUser() {
-  const user = document.getElementById("login-username").value.trim();
+  let user = document.getElementById("login-username").value.trim().toLowerCase();
   const pass = document.getElementById("login-password").value.trim();
 
   const saved = localStorage.getItem(user);
@@ -45,10 +47,6 @@ function loginUser() {
   window.location.href = "dashboard.html";
 }
 
-function logoutUser() {
-  localStorage.removeItem("loggedIn");
-  window.location.href = "index.html";
-}
 
 function showSignup() {
   document.getElementById("login-card").classList.add("hidden");
@@ -198,6 +196,7 @@ function showPDF(file) {
 function goBackDashboard() {
   window.location.href = "dashboard.html";
 }
+
 
 
 
