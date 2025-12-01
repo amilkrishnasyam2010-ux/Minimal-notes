@@ -30,6 +30,17 @@
         <button onclick="goTo('questions')">❓ Question Bank</button>
         <button onclick="goTo('oneword')">🧩 One Word</button>
       </div>
+  <button class="change-pass-btn" onclick="showChangePassword()">🔐 Change Password</button>
+
+<div id="change-password-box" class="hidden change-pass-box">
+  <h3>Change Password</h3>
+  <input type="password" id="old-pass" placeholder="Old Password">
+  <input type="password" id="new-pass" placeholder="New Password">
+  <input type="password" id="confirm-pass" placeholder="Confirm Password">
+  <button onclick="updatePassword()">Save Password</button>
+  <button onclick="closeChangePassword()" class="close-btn">Cancel</button>
+</div>
+    
     </section>
   </main>
 
