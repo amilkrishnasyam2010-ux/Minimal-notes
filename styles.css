@@ -272,6 +272,48 @@ html {
   opacity: 1;
   transform: translateY(0);
 }
+.change-pass-btn {
+  margin-top: 20px;
+  padding: 12px 20px;
+  background: #ff9800;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.change-pass-box {
+  margin-top: 20px;
+  background: #ffffff;
+  display: inline-block;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+}
+
+.change-pass-box input {
+  display: block;
+  width: 240px;
+  padding: 10px;
+  margin: 10px auto;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.change-pass-box button {
+  margin: 5px;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 6px;
+  background: #007bff;
+  color: white;
+  cursor: pointer;
+}
+
+.close-btn {
+  background: #ff4b4b !important;
+}
 
 
 
