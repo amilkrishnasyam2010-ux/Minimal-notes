@@ -173,6 +173,7 @@ async function verifyCode() {
 
 
 
+
 function showPDF(file) {
   document.getElementById("code-container").classList.add("hidden");
   const pdfDiv = document.getElementById("pdf-container");
@@ -197,5 +198,6 @@ function showPDF(file) {
 function goBackDashboard() {
   window.location.href = "dashboard.html";
 }
+
 
 
