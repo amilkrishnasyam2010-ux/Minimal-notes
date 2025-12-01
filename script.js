@@ -196,6 +196,42 @@ function showPDF(file) {
 function goBackDashboard() {
   window.location.href = "dashboard.html";
 }
+function showChangePassword() {
+  document.getElementById("change-password-box").classList.remove("hidden");
+}
+
+function closeChangePassword() {
+  document.getElementById("change-password-box").classList.add("hidden");
+}
+
+function updatePassword() {
+  const oldPass = document.getElementById("old-pass").value.trim();
+  const newPass = document.getElementById("new-pass").value.trim();
+  const confirmPass = document.getElementById("confirm-pass").value.trim();
+
+  const user = localStorage.getItem("loggedIn");
+  const data = JSON.parse(localStorage.getItem(user));
+
+  if (!oldPass || !newPass || !confirmPass)
+    return alert("Please fill in all fields!");
+
+  if (oldPass !== data.password)
+    return alert("Old password is incorrect!");
+
+  if (newPass.length < 4)
+    return alert("Password must be at least 4 characters!");
+
+  if (newPass !== confirmPass)
+    return alert("Passwords do not match!");
+
+  // Update password
+  data.password = newPass;
+  localStorage.setItem(user, JSON.stringify(data));
+
+  alert("Password updated successfully!");
+  closeChangePassword();
+}
+
 
 
 
