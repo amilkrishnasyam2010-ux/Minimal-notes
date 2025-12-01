@@ -142,14 +142,36 @@ function askCode(file) {
   document.getElementById("code-container").classList.remove("hidden");
 }
 
-function verifyCode() {
-  const entered = document.getElementById("code-input").value.trim();
+async function verifyCode() {
+  const username = localStorage.getItem("loggedIn");
   const file = localStorage.getItem("pendingFile");
-  const code = "MN" + btoa(file).slice(0, 4).toUpperCase(); // auto-code
+  const enteredCode = document.getElementById("code-input").value.trim();
 
-  if (entered !== code) return alert("Invalid Code!");
-  showPDF(file);
+  if (!enteredCode) return alert("Enter the code!");
+
+  const response = await fetch("https://script.google.com/macros/s/AKfycbwFEbrYyAoOIzQ0cIJBAFZRDWSM5HjD6I2_KcSVObupz8ER1O6mjllhqAEpH0Ohv0eKHQ/exec", {
+    method: "POST",
+    body: JSON.stringify({
+      username: username,
+      file: file,
+      code: enteredCode
+    })
+  });
+
+  const result = await response.json();
+
+  if (result.success) {
+    showPDF(file);
+  } else if (result.error === "wrong_code") {
+    alert("❌ Incorrect code!");
+  } else if (result.error === "not_found") {
+    alert("❌ You do not have access to this chapter!");
+  } else {
+    alert("⚠ Server error. Try again.");
+  }
 }
+
+
 
 function showPDF(file) {
   document.getElementById("code-container").classList.add("hidden");
@@ -175,4 +197,5 @@ function showPDF(file) {
 function goBackDashboard() {
   window.location.href = "dashboard.html";
 }
+
 
