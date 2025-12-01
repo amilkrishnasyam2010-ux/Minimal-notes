@@ -1,3 +1,5 @@
+const BACKEND_URL = "https://script.google.com/macros/s/AKfycbyydVvtQesLYECTNOyP3UIeTUeJyxaw51SMyegrelp-T6ZDzjWDYMKmlJQVFcY70UmzEQ/exec";
+
 // ---------- SUBJECTS ----------
 const subjects = {
   Physics: 7,
@@ -173,3 +175,4 @@ function showPDF(file) {
 function goBackDashboard() {
   window.location.href = "dashboard.html";
 }
+
