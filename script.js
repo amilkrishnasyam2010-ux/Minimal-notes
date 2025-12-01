@@ -231,6 +231,37 @@ function updatePassword() {
   alert("Password updated successfully!");
   closeChangePassword();
 }
+// Popup toggle
+function toggleAuthMenu() {
+  document.getElementById("auth-popup").classList.toggle("hidden");
+}
+
+// Modal
+function openLogin() {
+  document.getElementById("auth-modal").classList.remove("hidden");
+  document.getElementById("login-box").classList.remove("hidden");
+  document.getElementById("signup-box").classList.add("hidden");
+  document.getElementById("change-pass-box").classList.add("hidden");
+}
+
+function openSignup() {
+  document.getElementById("auth-modal").classList.remove("hidden");
+  document.getElementById("login-box").classList.add("hidden");
+  document.getElementById("signup-box").classList.remove("hidden");
+  document.getElementById("change-pass-box").classList.add("hidden");
+}
+
+function openChangePassword() {
+  document.getElementById("auth-modal").classList.remove("hidden");
+  document.getElementById("login-box").classList.add("hidden");
+  document.getElementById("signup-box").classList.add("hidden");
+  document.getElementById("change-pass-box").classList.remove("hidden");
+}
+
+function closeModal() {
+  document.getElementById("auth-modal").classList.add("hidden");
+}
+
 
 
 
