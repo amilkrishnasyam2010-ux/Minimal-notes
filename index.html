@@ -6,6 +6,47 @@
   <title>Minimal Notes</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
+<div id="login-modal" class="modal hidden">
+  <div class="modal-content">
+    <span class="close-modal" onclick="closeLoginModal()">×</span>
+    <h2>Login</h2>
+
+    <input type="text" id="login-username" placeholder="Username">
+    <input type="password" id="login-password" placeholder="Password">
+
+    <button onclick="loginUser()">Login</button>
+
+    <p class="modal-link" onclick="switchToSignup()">Don't have an account? Sign Up</p>
+    <p class="modal-link" onclick="switchToChangePass()">Forgot password?</p>
+  </div>
+</div>
+<div id="signup-modal" class="modal hidden">
+  <div class="modal-content">
+    <span class="close-modal" onclick="closeSignupModal()">×</span>
+    <h2>Create Account</h2>
+
+    <input type="text" id="signup-username" placeholder="Choose Username">
+    <input type="password" id="signup-password" placeholder="Choose Password">
+
+    <button onclick="signupUser()">Sign Up</button>
+
+    <p class="modal-link" onclick="switchToLogin()">Already have an account? Login</p>
+  </div>
+</div>
+<div id="change-password-modal" class="modal hidden">
+  <div class="modal-content">
+    <span class="close-modal" onclick="closeChangePassModal()">×</span>
+    <h2>Change Password</h2>
+
+    <input type="text" id="cp-username" placeholder="Username">
+    <input type="password" id="cp-old-password" placeholder="Old Password">
+    <input type="password" id="cp-new-password" placeholder="New Password">
+
+    <button onclick="changePassword()">Save</button>
+
+    <p class="modal-link" onclick="switchToLogin()">Back to Login</p>
+  </div>
+</div>
 
 <body>
 
@@ -63,5 +104,6 @@
 </body>
 <script src="script.js"></script>
 </html>
+
 
 
