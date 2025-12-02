@@ -101,5 +101,44 @@ document.addEventListener("click", function (event) {
     dropdown.classList.add("hidden");
   }
 });
+function openLoginModal() {
+  document.getElementById("login-modal").classList.remove("hidden");
+}
+
+function closeLoginModal() {
+  document.getElementById("login-modal").classList.add("hidden");
+}
+
+function openSignupModal() {
+  document.getElementById("signup-modal").classList.remove("hidden");
+}
+
+function closeSignupModal() {
+  document.getElementById("signup-modal").classList.add("hidden");
+}
+
+function closeChangePassModal() {
+  document.getElementById("change-password-modal").classList.add("hidden");
+}
+
+function openChangePassModal() {
+  document.getElementById("change-password-modal").classList.remove("hidden");
+}
+function switchToSignup() {
+  closeLoginModal();
+  openSignupModal();
+}
+
+function switchToLogin() {
+  closeSignupModal();
+  closeChangePassModal();
+  openLoginModal();
+}
+
+function switchToChangePass() {
+  closeLoginModal();
+  openChangePassModal();
+}
+
 
 
