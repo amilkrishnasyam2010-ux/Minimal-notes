@@ -6,147 +6,68 @@
   <title>Minimal Notes</title>
   <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
-  <header class="hero">
+
+  <!-- ───────── TOP BAR ───────── -->
   <div class="top-bar">
-    <img src="images/logo.png" class="logo" alt="Minimal Notes">
+    <img src="images/logo.png" class="logo" alt="Minimal Notes Logo">
 
-    <button class="account-btn" onclick="toggleAuthMenu()">
-      Account ▾
-    </button>
+    <button class="account-btn" onclick="toggleAccountMenu()">Account ⌄</button>
 
-    <!-- Popup Auth Box -->
-    <div id="auth-popup" class="auth-popup hidden">
-      <button onclick="openLogin()">Login</button>
-      <button onclick="openSignup()">Sign Up</button>
-      <button onclick="openChangePassword()" id="change-pass-btn" class="hidden">Change Password</button>
+    <!-- DROPDOWN MENU -->
+    <div id="account-menu" class="auth-popup hidden">
+      <button onclick="openModal('login-modal')">Login</button>
+      <button onclick="openModal('signup-modal')">Sign Up</button>
+      <button onclick="openModal('password-modal')">Change Password</button>
     </div>
   </div>
 
-  <div class="hero-content">
-    <h1>Minimal Notes</h1>
-    <p class="tagline">Making Notes Minimal 📘</p>
-    <a href="#features" class="scroll-btn">Explore Features ↓</a>
-  </div>
-</header>
+  <!-- ───────── HERO SECTION ───────── -->
+  <header class="hero">
+    <h1>🔥 Minimal Notes</h1>
+    <p class="tagline">Free + Premium Exam-Ready Notes — Super Simplified 📘</p>
+  </header>
 
-<!-- AUTH MODAL -->
-<div id="auth-modal" class="modal hidden">
-  <div class="modal-content">
-    <span class="close-modal" onclick="closeModal()">×</span>
 
-    <div id="login-box">
+  <!-- ───────── MODALS (POPUPS) ───────── -->
+
+  <!-- LOGIN -->
+  <div id="login-modal" class="modal hidden">
+    <div class="modal-content">
+      <span class="close-modal" onclick="closeModal('login-modal')">×</span>
       <h2>Login</h2>
-      <input id="login-username" placeholder="Username">
-      <input id="login-password" placeholder="Password" type="password">
+      <input id="login-username" placeholder="Username" />
+      <input id="login-password" type="password" placeholder="Password" />
       <button onclick="loginUser()">Login</button>
     </div>
+  </div>
 
-    <div id="signup-box" class="hidden">
+  <!-- SIGNUP -->
+  <div id="signup-modal" class="modal hidden">
+    <div class="modal-content">
+      <span class="close-modal" onclick="closeModal('signup-modal')">×</span>
       <h2>Create Account</h2>
-      <input id="signup-username" placeholder="Choose username">
-      <input id="signup-password" placeholder="Choose password" type="password">
+      <input id="signup-username" placeholder="Username" />
+      <input id="signup-password" type="password" placeholder="Password" />
       <button onclick="signupUser()">Sign Up</button>
     </div>
+  </div>
 
-    <div id="change-pass-box" class="hidden">
+  <!-- CHANGE PASSWORD -->
+  <div id="password-modal" class="modal hidden">
+    <div class="modal-content">
+      <span class="close-modal" onclick="closeModal('password-modal')">×</span>
       <h2>Change Password</h2>
-      <input id="old-pass" placeholder="Old password" type="password">
-      <input id="new-pass" placeholder="New password" type="password">
-      <input id="confirm-pass" placeholder="Confirm new password" type="password">
-      <button onclick="updatePassword()">Update Password</button>
+      <input id="old-pass" type="password" placeholder="Old Password" />
+      <input id="new-pass" type="password" placeholder="New Password" />
+      <button onclick="changePassword()">Save</button>
     </div>
   </div>
-</div>
-
-<section id="features" class="features">
-  <h2>Why Choose Minimal Notes?</h2>
-  <div class="feature-container">
-    <div class="feature-card fade-in">
-      <h3>📘 Organized Notes</h3>
-      <p>Find all your subjects neatly arranged — Physics, Chemistry, Biology, History & Geography.</p>
-    </div>
-    <div class="feature-card fade-in">
-      <h3>⚡ Instant Access</h3>
-      <p>Use your unique access code to instantly unlock and download your study materials.</p>
-    </div>
-    <div class="feature-card fade-in">
-      <h3>☁️ Cloud Synced</h3>
-      <p>Access your downloaded notes anytime, anywhere — across all devices.</p>
-    </div>
-  </div>
-</section>
-
-  <section id="features" class="features">
-    <h2>Why Minimal Notes?</h2>
-    <div class="feature-grid">
-      <div class="feature-card">
-        <h3>📚 Organized Learning</h3>
-        <p>Access Notes, Question Banks, and One Word sections for each subject.</p>
-      </div>
-      <div class="feature-card">
-        <h3>💾 Download Anytime</h3>
-        <p>Download your study materials and revisit them anytime with a unique code.</p>
-      </div>
-      <div class="feature-card">
-        <h3>🔐 Secure Access</h3>
-        <p>Every user has their own account, ensuring personalized study space.</p>
-      </div>
-    </div>
-  </section>
-
-  <section id="auth" class="auth-section">
-    <div class="auth-card" id="login-card">
-      <h2>Login</h2>
-      <input type="text" id="login-username" placeholder="Username" />
-      <input type="password" id="login-password" placeholder="Password" />
-      <button onclick="loginUser()">Login</button>
-      <p>Don't have an account? <a href="#" onclick="showSignup()">Sign up</a></p>
-    </div>
-
-    <div class="auth-card hidden" id="signup-card">
-      <h2>Sign Up</h2>
-      <input type="text" id="signup-username" placeholder="Choose a username" />
-      <input type="password" id="signup-password" placeholder="Create password" />
-      <button onclick="signupUser()">Sign Up</button>
-      <p>Already registered? <a href="#" onclick="showLogin()">Login</a></p>
-    </div>
-  </section>
-
-  <footer>
-    <p>© 2025 Minimal Notes | Built with ❤️ simplicity</p>
-  </footer>
 
   <script src="script.js"></script>
 </body>
-  <script defer src="script.js"></script>
-
-  <script>
-    // Fade-in animation when scrolling
-    const elements = document.querySelectorAll('.feature-card');
-    window.addEventListener('scroll', () => {
-      elements.forEach(el => {
-        const pos = el.getBoundingClientRect().top;
-        if (pos < window.innerHeight - 50) el.classList.add('visible');
-      });
-    });
-  </script>
-<script>
-  // Fade-in animation when scrolling
-  const elements = document.querySelectorAll('.feature-card');
-  window.addEventListener('scroll', () => {
-    elements.forEach(el => {
-      const pos = el.getBoundingClientRect().top;
-      if (pos < window.innerHeight - 50) el.classList.add('visible');
-    });
-  });
-</script>
-  
-</body>
 </html>
-  
-</html>
-
 
 
 
