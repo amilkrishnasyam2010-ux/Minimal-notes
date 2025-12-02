@@ -6,27 +6,61 @@
   <title>Minimal Notes</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
-<!-- SUPERLIST STYLE TOP BAR -->
-<header class="top-bar">
-  <div class="left-nav">
-    <img src="images/logo.png" class="nav-logo" alt="Minimal Notes Logo">
-    <span class="brand-name">Minimal Notes</span>
-  </div>
-
-  <div class="right-nav">
-    <button class="nav-btn" onclick="openAccountMenu()">Account ▾</button>
-
-    <!-- Dropdown -->
-    <div id="account-menu" class="dropdown hidden">
-      <button onclick="openLoginModal()">Login</button>
-      <button onclick="openSignupModal()">Sign Up</button>
-    </div>
-  </div>
-</header>
 
 <body>
 
-@@ -63,3 +80,4 @@
+  <!-- SUPERLIST STYLE NAV -->
+  <header class="top-nav">
+    <div class="left-nav">
+      <img src="images/logo.png" class="nav-logo" alt="Minimal Notes Logo">
+      <span class="brand-name">Minimal Notes</span>
+    </div>
+
+    <div class="right-nav">
+      <button class="nav-btn" onclick="toggleAccountMenu()">Account ⌄</button>
+    </div>
+  </header>
+
+  <!-- DROPDOWN MENU -->
+  <div id="account-menu" class="dropdown hidden">
+    <button onclick="openLoginModal()">Login</button>
+    <button onclick="openSignupModal()">Sign Up</button>
+  </div>
+
+  <!-- AUTH MODAL -->
+  <div id="auth-modal" class="modal hidden">
+    <div class="modal-box">
+      <span class="close" onclick="closeModal()">×</span>
+      <h2 id="modal-title">Login</h2>
+
+      <input id="modal-username" placeholder="Username">
+      <input id="modal-password" type="password" placeholder="Password">
+
+      <div id="confirm-password-box" class="hidden">
+        <input id="modal-confirm" type="password" placeholder="Confirm Password">
+      </div>
+
+      <button id="modal-action-btn">Login</button>
+
+      <!-- Change Password (Inside Modal) -->
+      <button id="open-change-pass" class="small-link hidden" onclick="showChangePass()">Change Password</button>
+
+      <div id="change-pass-section" class="hidden">
+        <input id="old-pass" type="password" placeholder="Old Password">
+        <input id="new-pass" type="password" placeholder="New Password">
+        <button onclick="submitPasswordChange()">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero">
+    <h1> Minimal Notes</h1>
+    <p class="tagline">
+      Free + Premium Exam-Ready Notes — Super Simplified
+    </p>
+  </section>
+
 </body>
 <script src="script.js"></script>
 </html>
