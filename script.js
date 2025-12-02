@@ -75,4 +75,31 @@ async function changePassword() {
 
   if (result.includes("success")) closeModal("change-pass-modal");
 }
+function openAccountMenu() {
+  document.getElementById("account-menu").classList.toggle("hidden");
+}
+
+function openLoginModal() {
+  closeDropdown();
+  document.getElementById("login-modal").classList.remove("hidden");
+}
+
+function openSignupModal() {
+  closeDropdown();
+  document.getElementById("signup-modal").classList.remove("hidden");
+}
+
+function closeDropdown() {
+  document.getElementById("account-menu").classList.add("hidden");
+}
+
+document.addEventListener("click", function (event) {
+  const dropdown = document.getElementById("account-menu");
+  const button = document.querySelector(".nav-btn");
+
+  if (!dropdown.contains(event.target) && !button.contains(event.target)) {
+    dropdown.classList.add("hidden");
+  }
+});
+
 
