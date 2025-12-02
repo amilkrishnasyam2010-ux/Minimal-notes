@@ -1,5 +1,6 @@
-/* Global */
+/* Global resets */
 * { box-sizing: border-box; }
+html,body { height: 100%; }
 body {
   margin: 0;
   font-family: "Poppins", sans-serif;
@@ -7,6 +8,8 @@ body {
   color: #222;
   -webkit-font-smoothing:antialiased;
 }
+
+/* Hidden utility */
 .hidden { display: none !important; }
 
 /* Top bar (fixed) */
@@ -24,12 +27,11 @@ body {
   box-shadow: 0 3px 12px rgba(0,0,0,0.06);
   z-index: 1000;
 }
-
-/* left area (logo) */
 .top-left { display:flex; align-items:center; gap:12px; }
 .logo { height:42px; display:block; }
+.site-title { font-weight:700; color:#0b2a66; display:none; } /* hidden if using logo */
 
-/* right area (account button + dropdown) */
+/* account button & dropdown */
 .top-right { position: relative; display:flex; align-items:center; gap:8px; }
 .account-btn {
   background:#fff;
@@ -40,7 +42,7 @@ body {
   cursor:pointer;
   box-shadow: 0 6px 18px rgba(0,0,0,0.04);
 }
-.account-btn:focus { outline:2px solid rgba(0,123,255,0.15); }
+.account-btn:focus { outline: 3px solid rgba(0,123,255,0.12); }
 
 /* dropdown menu inside top-bar */
 .auth-popup {
@@ -67,18 +69,18 @@ body {
 }
 .auth-popup .menu-item:hover { background:#f5f7ff; border-radius:6px; }
 
-/* hero area */
+/* Hero */
 .hero {
-  padding: 120px 20px 60px; /* leaves room for fixed top bar */
+  padding: 120px 20px 60px; /* leaves space for top bar */
   text-align: center;
   background: linear-gradient(135deg,#007bff,#004080);
   color: white;
 }
-.hero h1 { font-size: 2.8rem; margin:0 0 8px; }
+.hero h1 { font-size:2.6rem; margin:0 0 8px; }
 .tagline { opacity:0.95; margin:0 0 14px; }
 
-/* content sections */
-.features { padding: 48px 20px; background:#fff; text-align:center; }
+/* Features */
+.features { padding:48px 20px; background:#fff; text-align:center; }
 .feature-grid { display:flex; gap:18px; justify-content:center; flex-wrap:wrap; }
 .feature-card {
   width:260px;
@@ -88,7 +90,7 @@ body {
   box-shadow: 0 6px 20px rgba(20,40,80,0.04);
 }
 
-/* modals */
+/* Modals */
 .modal {
   position: fixed;
   inset: 0;
@@ -122,9 +124,8 @@ body {
   margin:8px 0;
   border-radius:8px;
   border:1px solid #ddd;
+  font-size:15px;
 }
-
-/* buttons in modal */
 .modal-content button {
   width:100%;
   padding:12px;
@@ -137,11 +138,12 @@ body {
   cursor:pointer;
 }
 
-/* small helpers */
+/* Accessibility helper */
 .sr-only { position:absolute; left:-9999px; top:auto; width:1px; height:1px; overflow:hidden; }
 
-/* responsive */
+/* Responsive */
 @media (max-width:520px){
-  .modal-content { width: 92%; padding:18px; }
-  .top-bar { padding: 0 12px; }
+  .modal-content { width:92%; padding:18px; }
+  .top-bar { padding: 0 12px; height:64px; }
+  .hero { padding-top:100px; }
 }
