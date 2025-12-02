@@ -1,87 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Minimal Notes</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-  <!-- TOP BAR -->
-  <header class="top-bar" role="banner">
-    <div class="top-left">
-      <img src="images/logo.png" alt="Minimal Notes Logo" class="logo" onerror="this.style.display='none'">
-      <span class="site-title">Minimal Notes</span>
+  <!-- SUPERLIST STYLE TOP NAV -->
+  <nav class="top-nav">
+    <div class="left-section">
+      <img src="images/logo.png" class="nav-logo" alt="Minimal Notes Logo">
+      <span class="brand-name">Minimal Notes</span>
     </div>
 
-    <div class="top-right">
-      <button id="accountBtn" class="account-btn" aria-haspopup="true" aria-expanded="false">Account ▾</button>
-
-      <!-- Dropdown menu (hidden by default) -->
-      <div id="accountMenu" class="auth-popup hidden" role="menu" aria-hidden="true">
-        <button class="menu-item" id="menuLogin">Login</button>
-        <button class="menu-item" id="menuSignup">Sign Up</button>
-        <button class="menu-item" id="menuChangePass">Change Password</button>
-      </div>
+    <div class="right-section">
+      <button onclick="openLogin()" class="nav-btn">Sign In</button>
+      <button onclick="openSignup()" class="nav-btn highlight">Sign Up</button>
     </div>
+  </nav>
+
+  <!-- HERO SECTION -->
+  <header class="hero">
+    <h1>🔥 Minimal Notes</h1>
+    <p class="tagline">Free + Premium Exam-Ready Notes — Super Simplified 📘</p>
   </header>
 
-  <!-- HERO -->
-  <main>
-    <section class="hero" role="main">
-      <h1>🔥 Minimal Notes</h1>
-      <p class="tagline">Free + Premium Exam-Ready Notes — Super Simplified 📘</p>
-      <a href="#features" class="cta">Explore Features ↓</a>
-    </section>
-
-    <!-- FEATURES -->
-    <section id="features" class="features">
-      <h2>Why Minimal Notes?</h2>
-      <div class="feature-grid">
-        <div class="feature-card">Organized notes</div>
-        <div class="feature-card">Instant access</div>
-        <div class="feature-card">Download anytime</div>
-      </div>
-    </section>
-  </main>
-
-  <!-- MODALS (hidden) -->
+  <!-- ===== MODALS ===== -->
 
   <!-- LOGIN MODAL -->
-  <div id="loginModal" class="modal hidden" aria-hidden="true">
-    <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="loginTitle">
-      <button class="close-modal" data-close="loginModal">×</button>
-      <h2 id="loginTitle">Login</h2>
-      <input id="login-username" placeholder="Username" autocomplete="username" />
-      <input id="login-password" type="password" placeholder="Password" autocomplete="current-password" />
-      <button id="loginSubmit">Login</button>
+  <div id="login-modal" class="modal hidden">
+    <div class="modal-content">
+      <span class="close-modal" onclick="closeModal('login-modal')">×</span>
+      <h2>Login</h2>
+
+      <input id="login-username" placeholder="Username" />
+      <input id="login-password" type="password" placeholder="Password" />
+
+      <button onclick="loginUser()">Login</button>
+
+      <p class="link" onclick="openChangePass()">Change Password</p>
+      <p class="link" onclick="switchToSignup()">Create an account</p>
     </div>
   </div>
 
   <!-- SIGNUP MODAL -->
-  <div id="signupModal" class="modal hidden" aria-hidden="true">
-    <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="signupTitle">
-      <button class="close-modal" data-close="signupModal">×</button>
-      <h2 id="signupTitle">Create Account</h2>
-      <input id="signup-username" placeholder="Choose username" />
-      <input id="signup-password" type="password" placeholder="Choose password" />
-      <button id="signupSubmit">Sign Up</button>
+  <div id="signup-modal" class="modal hidden">
+    <div class="modal-content">
+      <span class="close-modal" onclick="closeModal('signup-modal')">×</span>
+      <h2>Create Account</h2>
+
+      <input id="signup-username" placeholder="Username">
+      <input id="signup-password" type="password" placeholder="Password">
+
+      <button onclick="signupUser()">Sign Up</button>
+
+      <p class="link" onclick="switchToLogin()">Already have an account?</p>
     </div>
   </div>
 
   <!-- CHANGE PASSWORD MODAL -->
-  <div id="changePassModal" class="modal hidden" aria-hidden="true">
-    <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="changePassTitle">
-      <button class="close-modal" data-close="changePassModal">×</button>
-      <h2 id="changePassTitle">Change Password</h2>
-      <input id="old-pass" type="password" placeholder="Old password" />
-      <input id="new-pass" type="password" placeholder="New password" />
-      <button id="changePassSubmit">Save</button>
+  <div id="change-pass-modal" class="modal hidden">
+    <div class="modal-content">
+      <span class="close-modal" onclick="closeModal('change-pass-modal')">×</span>
+      <h2>Change Password</h2>
+
+      <input id="old-pass" type="password" placeholder="Old Password">
+      <input id="new-pass" type="password" placeholder="New Password">
+
+      <button onclick="changePassword()">Save</button>
     </div>
   </div>
 
   <script src="script.js"></script>
 </body>
 </html>
-
