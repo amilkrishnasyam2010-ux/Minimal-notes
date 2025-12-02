@@ -122,5 +122,27 @@ function openChangePassword() {
 function closeModal(id) {
   document.getElementById(id).classList.add("hidden");
 }
+// --- FIX LOGIN POPUP ---
+document.getElementById("account-btn").addEventListener("click", () => {
+  document.getElementById("auth-popup").classList.toggle("hidden");
+});
+
+// Open Sign-up modal
+function openSignup() {
+  document.getElementById("auth-popup").classList.add("hidden");
+  document.getElementById("signup-modal").classList.remove("hidden");
+}
+
+// Open Login modal
+function openLogin() {
+  document.getElementById("auth-popup").classList.add("hidden");
+  document.getElementById("login-modal").classList.remove("hidden");
+}
+
+// Close modal
+function closeModal(id) {
+  document.getElementById(id).classList.add("hidden");
+}
+
 
 
