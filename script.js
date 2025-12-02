@@ -1,144 +1,90 @@
-// YOUR BACKEND URL
+/* ------------------------------------
+   BACKEND URL (Google Apps Script)
+------------------------------------ */
 const BACKEND_URL = "https://script.google.com/macros/s/AKfycbyydVvtQesLYECTNOyP3UIeTUeJyxaw51SMyegrelp-T6ZDzjWDYMKmlJQVFcY70UmzEQ/exec";
 
-// SHOW / HIDE MODALS
-function openLogin() {
-  document.getElementById("login-modal").classList.remove("hidden");
-}
-
-function openSignup() {
-  document.getElementById("signup-modal").classList.remove("hidden");
-}
-
-function openChangePass() {
-  closeModal("login-modal");
-  document.getElementById("change-pass-modal").classList.remove("hidden");
-}
-
-function closeModal(id) {
-  document.getElementById(id).classList.add("hidden");
-}
-
-function switchToSignup() {
-  closeModal("login-modal");
-  openSignup();
-}
-
-function switchToLogin() {
-  closeModal("signup-modal");
-  openLogin();
-}
-
-// SIGNUP USER
-async function signupUser() {
-  let username = document.getElementById("signup-username").value.trim().toLowerCase();
-  let password = document.getElementById("signup-password").value.trim();
-
-  if (!username || !password) return alert("Fill all fields!");
-
-  const res = await fetch(BACKEND_URL + `?action=signup&username=${username}&password=${password}`);
-  const result = await res.text();
-
-  alert(result);
-  if (result.includes("success")) closeModal("signup-modal");
-}
-
-// LOGIN USER
-async function loginUser() {
-  let username = document.getElementById("login-username").value.trim().toLowerCase();
-  let password = document.getElementById("login-password").value.trim();
-
-  const res = await fetch(BACKEND_URL + `?action=login&username=${username}&password=${password}`);
-  const result = await res.text();
-
-  if (result.includes("success")) {
-    alert("Login successful!");
-    localStorage.setItem("user", username);
-    window.location.href = "dashboard.html";
-  } else {
-    alert("Incorrect username or password!");
-  }
-}
-
-// CHANGE PASSWORD
-async function changePassword() {
-  let username = localStorage.getItem("user");
-  let oldPass = document.getElementById("old-pass").value;
-  let newPass = document.getElementById("new-pass").value;
-
-  const res = await fetch(
-    BACKEND_URL + `?action=changepassword&username=${username}&old=${oldPass}&new=${newPass}`
-  );
-
-  const result = await res.text();
-  alert(result);
-
-  if (result.includes("success")) closeModal("change-pass-modal");
-}
-function openAccountMenu() {
+/* ------------ DROPDOWN ------------- */
+function toggleAccountMenu() {
   document.getElementById("account-menu").classList.toggle("hidden");
 }
 
-function openLoginModal() {
-  closeDropdown();
-  document.getElementById("login-modal").classList.remove("hidden");
+/* ------------ MODAL CONTROL ------------- */
+function closeModal() {
+  document.getElementById("auth-modal").classList.add("hidden");
+  document.getElementById("change-pass-section").classList.add("hidden");
 }
 
-function openSignupModal() {
-  closeDropdown();
-  document.getElementById("signup-modal").classList.remove("hidden");
-}
-
-function closeDropdown() {
+function openModal() {
+  document.getElementById("auth-modal").classList.remove("hidden");
   document.getElementById("account-menu").classList.add("hidden");
 }
 
-document.addEventListener("click", function (event) {
-  const dropdown = document.getElementById("account-menu");
-  const button = document.querySelector(".nav-btn");
-
-  if (!dropdown.contains(event.target) && !button.contains(event.target)) {
-    dropdown.classList.add("hidden");
-  }
-});
+/* ------------ LOGIN MODAL ------------- */
 function openLoginModal() {
-  document.getElementById("login-modal").classList.remove("hidden");
+  openModal();
+  document.getElementById("modal-title").innerText = "Login";
+  document.getElementById("modal-action-btn").innerText = "Login";
+  document.getElementById("confirm-password-box").classList.add("hidden");
+  document.getElementById("open-change-pass").classList.remove("hidden");
+
+  document.getElementById("modal-action-btn").onclick = loginUser;
 }
 
-function closeLoginModal() {
-  document.getElementById("login-modal").classList.add("hidden");
-}
-
+/* ------------ SIGNUP MODAL ------------- */
 function openSignupModal() {
-  document.getElementById("signup-modal").classList.remove("hidden");
+  openModal();
+  document.getElementById("modal-title").innerText = "Create Account";
+  document.getElementById("modal-action-btn").innerText = "Sign Up";
+  document.getElementById("confirm-password-box").classList.remove("hidden");
+  document.getElementById("open-change-pass").classList.add("hidden");
+
+  document.getElementById("modal-action-btn").onclick = signupUser;
 }
 
-function closeSignupModal() {
-  document.getElementById("signup-modal").classList.add("hidden");
+/* ------------ CHANGE PASSWORD ------------- */
+function showChangePass() {
+  document.getElementById("change-pass-section").classList.toggle("hidden");
 }
 
-function closeChangePassModal() {
-  document.getElementById("change-password-modal").classList.add("hidden");
+function submitPasswordChange() {
+  const user = document.getElementById("modal-username").value;
+  const oldPass = document.getElementById("old-pass").value;
+  const newPass = document.getElementById("new-pass").value;
+
+  fetch(BACKEND_URL + "?action=changePassword&username=" + user + "&old=" + oldPass + "&new=" + newPass)
+    .then(res => res.text())
+    .then(alert);
 }
 
-function openChangePassModal() {
-  document.getElementById("change-password-modal").classList.remove("hidden");
-}
-function switchToSignup() {
-  closeLoginModal();
-  openSignupModal();
-}
+/* ------------ LOGIN FUNCTION ------------- */
+function loginUser() {
+  const user = document.getElementById("modal-username").value;
+  const pass = document.getElementById("modal-password").value;
 
-function switchToLogin() {
-  closeSignupModal();
-  closeChangePassModal();
-  openLoginModal();
-}
-
-function switchToChangePass() {
-  closeLoginModal();
-  openChangePassModal();
+  fetch(BACKEND_URL + "?action=login&username=" + user + "&password=" + pass)
+    .then(res => res.text())
+    .then(result => {
+      if (result === "success") {
+        alert("Logged in!");
+        closeModal();
+      } else {
+        alert("Incorrect login");
+      }
+    });
 }
 
+/* ------------ SIGNUP FUNCTION ------------- */
+function signupUser() {
+  const user = document.getElementById("modal-username").value;
+  const pass = document.getElementById("modal-password").value;
+  const confirm = document.getElementById("modal-confirm").value;
 
+  if (pass !== confirm) {
+    alert("Passwords do not match!");
+    return;
+  }
 
+  fetch(BACKEND_URL + "?action=signup&username=" + user + "&password=" + pass)
+    .then(res => res.text())
+    .then(alert);
+}
