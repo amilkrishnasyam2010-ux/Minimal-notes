@@ -1,75 +1,90 @@
-const BACKEND_URL = "https://script.google.com/macros/s/AKfycbyydVvtQesLYECTNOyP3UIeTUeJyxaw51SMyegrelp-T6ZDzjWDYMKmlJQVFcY70UmzEQ/exec";
+/* ───────── BACKEND URL FOR ACCESS CODE VALIDATION ───────── */
+const BACKEND_URL =
+  "https://script.google.com/macros/s/AKfycbyydVvtQesLYECTNOyP3UIeTUeJyxaw51SMyegrelp-T6ZDzjWDYMKmlJQVFcY70UmzEQ/exec";
 
-// ---------- SUBJECTS ----------
-const subjects = {
-  Physics: 7,
-  Chemistry: 7,
-  Biology: 6,
-  Geography: 8,
-  History: 9,
-  Maths_QB: 10    // Maths ONLY for Question Bank
-};
-
-// ---------- FREE ACCESS FILES ----------
-const freeFiles = [
-  "Maths_6_QB",
-  "Maths_7_QB",
-  "History_4_QB",
-  "Physics_5_QB"
-];
-
-// ---------- AUTH SYSTEM ----------
-function signupUser() {
-  let user = document.getElementById("signup-username").value.trim().toLowerCase();
-  const pass = document.getElementById("signup-password").value.trim();
-
-  if (!user || !pass) return alert("Please fill in all fields!");
-
-  if (localStorage.getItem(user)) return alert("User already exists!");
-
-  localStorage.setItem(user, JSON.stringify({ password: pass, downloads: [] }));
-  alert("Account created successfully!");
-  showLogin();
+/* ───────── TOP BAR MENU ───────── */
+function toggleAccountMenu() {
+  document.getElementById("account-menu").classList.toggle("hidden");
 }
 
+function openModal(id) {
+  closeAllMenus();
+  document.getElementById(id).classList.remove("hidden");
+}
+
+function closeModal(id) {
+  document.getElementById(id).classList.add("hidden");
+}
+
+function closeAllMenus() {
+  const menu = document.getElementById("account-menu");
+  if (menu) menu.classList.add("hidden");
+}
+
+/* ───────── AUTH SYSTEM ───────── */
+function signupUser() {
+  const u = document.getElementById("signup-username").value.trim().toLowerCase();
+  const p = document.getElementById("signup-password").value.trim();
+
+  if (!u || !p) return alert("Fill all fields.");
+  if (localStorage.getItem(u)) return alert("User already exists.");
+
+  localStorage.setItem(u, JSON.stringify({ password: p, downloads: [] }));
+
+  alert("Account created!");
+  closeModal("signup-modal");
+}
 
 function loginUser() {
-  let user = document.getElementById("login-username").value.trim().toLowerCase();
-  const pass = document.getElementById("login-password").value.trim();
+  const u = document.getElementById("login-username").value.trim().toLowerCase();
+  const p = document.getElementById("login-password").value.trim();
 
-  const saved = localStorage.getItem(user);
-  if (!saved) return alert("User not found!");
+  const data = localStorage.getItem(u);
+  if (!data) return alert("User not found.");
 
-  const data = JSON.parse(saved);
-  if (data.password !== pass) return alert("Wrong password!");
+  const user = JSON.parse(data);
 
-  localStorage.setItem("loggedIn", user);
+  if (user.password !== p) return alert("Wrong password.");
+
+  localStorage.setItem("loggedIn", u);
   window.location.href = "dashboard.html";
 }
 
+function changePassword() {
+  const u = localStorage.getItem("loggedIn");
+  if (!u) return alert("Login first.");
 
-function showSignup() {
-  document.getElementById("login-card").classList.add("hidden");
-  document.getElementById("signup-card").classList.remove("hidden");
+  const oldPass = document.getElementById("old-pass").value.trim();
+  const newPass = document.getElementById("new-pass").value.trim();
+
+  const user = JSON.parse(localStorage.getItem(u));
+
+  if (oldPass !== user.password) return alert("Incorrect old password.");
+
+  user.password = newPass;
+  localStorage.setItem(u, JSON.stringify(user));
+
+  alert("Password changed successfully!");
+  closeModal("password-modal");
 }
 
-function showLogin() {
-  document.getElementById("signup-card").classList.add("hidden");
-  document.getElementById("login-card").classList.remove("hidden");
-}
-
-// ---------- DASHBOARD ----------
+/* ───────── DASHBOARD ───────── */
 if (window.location.pathname.endsWith("dashboard.html")) {
-  const user = localStorage.getItem("loggedIn");
-  if (!user) window.location.href = "index.html";
-  else {
-    document.getElementById("user-name").innerText = user;
-    const data = JSON.parse(localStorage.getItem(user));
-    const list = document.getElementById("downloaded-list");
+  const u = localStorage.getItem("loggedIn");
+  if (!u) window.location.href = "index.html";
 
-    if (data.downloads.length > 0)
-      list.innerHTML = data.downloads.map(f => `<li>${f}</li>`).join("");
-  }
+  document.getElementById("user-name").innerText = u;
+
+  const info = JSON.parse(localStorage.getItem(u));
+  const list = document.getElementById("downloaded-list");
+
+  if (info.downloads.length === 0) list.innerHTML = "<li>No downloads yet.</li>";
+  else list.innerHTML = info.downloads.map(f => `<li>${f}</li>`).join("");
+}
+
+function logoutUser() {
+  localStorage.removeItem("loggedIn");
+  window.location.href = "index.html";
 }
 
 function goTo(type) {
@@ -77,190 +92,121 @@ function goTo(type) {
   window.location.href = "notes.html";
 }
 
-// ---------- NOTES SYSTEM ----------
+/* ───────── NOTES PAGE ───────── */
+
+const FREE_CHAPTERS = [
+  "Maths_6_QB",
+  "Maths_7_QB",
+  "History_4_QB",
+  "Physics_5_QB"
+];
+
+const subjects = {
+  Notes: {
+    Physics: 7,
+    Chemistry: 7,
+    Biology: 6,
+    Geography: 8,
+    History: 9
+  },
+  questions: {
+    Physics: 7,
+    Chemistry: 7,
+    Biology: 6,
+    Geography: 8,
+    History: 9,
+    Maths: 10
+  }
+};
+
 if (window.location.pathname.endsWith("notes.html")) {
   const section = localStorage.getItem("section");
-  document.getElementById("section-title").innerText =
-    section.charAt(0).toUpperCase() + section.slice(1);
+  document.getElementById("section-title").innerText = section.toUpperCase();
 
-  const subjectContainer = document.getElementById("subject-container");
+  const container = document.getElementById("subject-container");
+  const list = subjects[section];
 
-  Object.keys(subjects).forEach(sub => {
-    // Show Maths only in Question Bank
-    if (sub === "Maths_QB" && section !== "questions") return;
-
-    // Display name (Maths_QB → Maths)
-    const displayName = sub === "Maths_QB" ? "Maths" : sub;
-
-    const btn = document.createElement("button");
-    btn.textContent = displayName;
-    btn.onclick = () => showChapters(sub);
-    subjectContainer.appendChild(btn);
+  Object.keys(list).forEach(sub => {
+    let btn = document.createElement("button");
+    btn.textContent = sub; // now clean, “Maths” not “Maths_QB”
+    btn.onclick = () => showChapters(sub, list[sub], section);
+    container.appendChild(btn);
   });
 }
 
-function showChapters(subject) {
+function showChapters(subject, count, section) {
   document.getElementById("subject-container").classList.add("hidden");
-  const chapterDiv = document.getElementById("chapter-container");
-  chapterDiv.innerHTML = `<h3>${subject === "Maths_QB" ? "Maths" : subject} - Select Chapter</h3>`;
+  const box = document.getElementById("chapter-container");
 
-  const section = localStorage.getItem("section");
+  box.innerHTML = `<h3>Select Chapter (${subject})</h3>`;
 
-  for (let i = 1; i <= subjects[subject]; i++) {
+  for (let i = 1; i <= count; i++) {
+    const file = `${subject}_${i}${section === "questions" ? "_QB" : ""}`;
     const btn = document.createElement("button");
 
-    // Build fileName
-    let fileName;
+    btn.textContent = FREE_CHAPTERS.includes(file)
+      ? `Chapter ${i} (FREE)`
+      : `Chapter ${i}`;
 
-    if (subject === "Maths_QB") {
-      fileName = `Maths_${i}_QB`;        // Maths only QB
-    } else {
-      fileName = `${subject}_${i}`;
-      if (section === "questions") fileName += "_QB";
-      if (section === "oneword") fileName += "_OW";
-    }
-
-    btn.textContent = `Chapter ${i}`;
-    btn.onclick = () => askCode(fileName);
-    chapterDiv.appendChild(btn);
+    btn.onclick = () => requestAccess(file);
+    box.appendChild(btn);
   }
-  chapterDiv.classList.remove("hidden");
+
+  box.classList.remove("hidden");
 }
 
-function askCode(file) {
-  localStorage.setItem("pendingFile", file);
-
-  // FREE CHAPTER → Skip code screen
-  if (freeFiles.includes(file)) {
+/* ───────── ACCESS CODE VALIDATION ───────── */
+function requestAccess(file) {
+  if (FREE_CHAPTERS.includes(file)) {
     showPDF(file);
     return;
   }
 
+  localStorage.setItem("pendingFile", file);
   document.getElementById("chapter-container").classList.add("hidden");
   document.getElementById("code-container").classList.remove("hidden");
 }
 
 async function verifyCode() {
-  const username = localStorage.getItem("loggedIn");
+  const user = localStorage.getItem("loggedIn");
+  const code = document.getElementById("code-input").value.trim();
   const file = localStorage.getItem("pendingFile");
-  const enteredCode = document.getElementById("code-input").value.trim();
 
-  if (!enteredCode) return alert("Enter the code!");
+  if (!user) return alert("Please log in.");
 
-  const response = await fetch("https://script.google.com/macros/s/AKfycbwFEbrYyAoOIzQ0cIJBAFZRDWSM5HjD6I2_KcSVObupz8ER1O6mjllhqAEpH0Ohv0eKHQ/exec", {
-    method: "POST",
-    body: JSON.stringify({
-      username: username,
-      file: file,
-      code: enteredCode
-    })
-  });
+  const url = `${BACKEND_URL}?user=${user}&file=${file}&code=${code}`;
 
-  const result = await response.json();
+  let response = await fetch(url);
+  let result = await response.json();
 
-  if (result.success) {
+  if (result.status === "approved") {
     showPDF(file);
-  } else if (result.error === "wrong_code") {
-    alert("❌ Incorrect code!");
-  } else if (result.error === "not_found") {
-    alert("❌ You do not have access to this chapter!");
   } else {
-    alert("⚠ Server error. Try again.");
+    alert("Invalid Code!");
   }
 }
 
-
-
-
+/* ───────── SHOW PDF ───────── */
 function showPDF(file) {
   document.getElementById("code-container").classList.add("hidden");
-  const pdfDiv = document.getElementById("pdf-container");
 
-  pdfDiv.innerHTML = `
-    <h3>Access Granted!</h3>
-    <a href="pdfs/${file}.pdf" target="_blank">📄 Preview PDF</a>
-    <a href="pdfs/${file}.pdf" download>⬇️ Download PDF</a>
+  const box = document.getElementById("pdf-container");
+  box.innerHTML = `
+    <h3>Access Granted</h3>
+    <a href="pdfs/${file}.pdf" target="_blank">📄 View PDF</a><br><br>
+    <a href="pdfs/${file}.pdf" download>⬇ Download PDF</a>
   `;
-  pdfDiv.classList.remove("hidden");
+  box.classList.remove("hidden");
 
-  // Save to downloads
-  const user = localStorage.getItem("loggedIn");
-  const data = JSON.parse(localStorage.getItem(user));
+  const u = localStorage.getItem("loggedIn");
+  const data = JSON.parse(localStorage.getItem(u));
 
   if (!data.downloads.includes(file)) {
     data.downloads.push(file);
-    localStorage.setItem(user, JSON.stringify(data));
+    localStorage.setItem(u, JSON.stringify(data));
   }
 }
 
-function goBackDashboard() {
-  window.location.href = "dashboard.html";
-}
-function showChangePassword() {
-  document.getElementById("change-password-box").classList.remove("hidden");
-}
-
-function closeChangePassword() {
-  document.getElementById("change-password-box").classList.add("hidden");
-}
-
-function updatePassword() {
-  const oldPass = document.getElementById("old-pass").value.trim();
-  const newPass = document.getElementById("new-pass").value.trim();
-  const confirmPass = document.getElementById("confirm-pass").value.trim();
-
-  const user = localStorage.getItem("loggedIn");
-  const data = JSON.parse(localStorage.getItem(user));
-
-  if (!oldPass || !newPass || !confirmPass)
-    return alert("Please fill in all fields!");
-
-  if (oldPass !== data.password)
-    return alert("Old password is incorrect!");
-
-  if (newPass.length < 4)
-    return alert("Password must be at least 4 characters!");
-
-  if (newPass !== confirmPass)
-    return alert("Passwords do not match!");
-
-  // Update password
-  data.password = newPass;
-  localStorage.setItem(user, JSON.stringify(data));
-
-  alert("Password updated successfully!");
-  closeChangePassword();
-}
-// Popup toggle
-function toggleAuthMenu() {
-  document.getElementById("auth-popup").classList.toggle("hidden");
-}
-
-// Modal
-function openLogin() {
-  document.getElementById("auth-modal").classList.remove("hidden");
-  document.getElementById("login-box").classList.remove("hidden");
-  document.getElementById("signup-box").classList.add("hidden");
-  document.getElementById("change-pass-box").classList.add("hidden");
-}
-
-function openSignup() {
-  document.getElementById("auth-modal").classList.remove("hidden");
-  document.getElementById("login-box").classList.add("hidden");
-  document.getElementById("signup-box").classList.remove("hidden");
-  document.getElementById("change-pass-box").classList.add("hidden");
-}
-
-function openChangePassword() {
-  document.getElementById("auth-modal").classList.remove("hidden");
-  document.getElementById("login-box").classList.add("hidden");
-  document.getElementById("signup-box").classList.add("hidden");
-  document.getElementById("change-pass-box").classList.remove("hidden");
-}
-
-function closeModal() {
-  document.getElementById("auth-modal").classList.add("hidden");
-}
 
 
 
