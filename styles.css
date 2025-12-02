@@ -1,32 +1,27 @@
-/* GLOBAL */
 body {
   margin: 0;
   font-family: "Poppins", sans-serif;
   background: #f7faff;
-  color: #222;
 }
 
-/* NAVBAR LIKE SUPERLIST */
+/* TOP NAV - Superlist Style */
 .top-nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 18px 40px;
-  background: white;
-  position: sticky;
-  top: 0;
-  z-index: 10;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  background: #0d0d17;
+  color: white;
 }
 
-.left-section {
+.left-nav {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
 }
 
 .nav-logo {
-  height: 40px;
+  height: 38px;
 }
 
 .brand-name {
@@ -34,94 +29,101 @@ body {
   font-weight: 600;
 }
 
-.right-section {
-  display: flex;
-  gap: 15px;
-}
-
-.nav-btn {
-  padding: 10px 20px;
-  border-radius: 25px;
+.right-nav .nav-btn {
   background: white;
-  border: 1px solid #ddd;
-  cursor: pointer;
+  color: #333;
+  padding: 10px 18px;
   font-weight: 600;
-}
-
-.highlight {
-  background: #ff3b30;
-  color: white;
+  border-radius: 30px;
+  cursor: pointer;
   border: none;
 }
 
-/* HERO */
-.hero {
-  padding: 80px 20px;
-  text-align: center;
-  background: linear-gradient(135deg, #007bff, #4a00e0);
-  color: white;
-}
-
-.tagline {
-  margin-top: 10px;
-  font-size: 1.2rem;
-}
-
-/* MODALS */
-.modal {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: rgba(0,0,0,0.5);
+/* Dropdown */
+.dropdown {
+  position: absolute;
+  top: 70px;
+  right: 45px;
+  background: white;
+  padding: 12px;
+  border-radius: 12px;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.2);
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.dropdown button {
+  background: none;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  text-align: left;
+  font-size: 1rem;
 }
 
 .hidden {
   display: none !important;
 }
 
-.modal-content {
+/* Modal */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.45);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-box {
   background: white;
   padding: 35px;
-  border-radius: 15px;
-  width: 340px;
+  width: 360px;
+  border-radius: 14px;
   position: relative;
 }
 
-.close-modal {
+.close {
   position: absolute;
+  top: 12px;
   right: 15px;
-  top: 10px;
-  font-size: 28px;
   cursor: pointer;
+  font-size: 26px;
 }
 
-.modal-content input {
+.modal-box input {
   width: 100%;
-  padding: 12px;
-  margin-top: 12px;
+  padding: 10px;
+  margin: 8px 0;
   border-radius: 8px;
-  border: 1px solid #ddd;
+  border: 1px solid #ccc;
 }
 
-.modal-content button {
+.modal-box button {
   width: 100%;
   padding: 12px;
-  margin-top: 15px;
-  background: #007bff;
   border: none;
+  background: #007bff;
   color: white;
+  border-radius: 10px;
+  font-size: 1rem;
   font-weight: 600;
-  border-radius: 8px;
-}
-
-.link {
-  margin-top: 10px;
-  font-size: 0.9rem;
-  color: #007bff;
+  margin-top: 8px;
   cursor: pointer;
-  text-align: center;
 }
 
+.small-btn {
+  padding: 8px;
+  font-size: 0.9rem;
+}
+
+/* HERO */
+.hero {
+  text-align: center;
+  padding: 70px 20px;
+  color: #111;
+}
