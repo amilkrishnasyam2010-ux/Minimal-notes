@@ -75,3 +75,4 @@ async function changePassword() {
 
   if (result.includes("success")) closeModal("change-pass-modal");
 }
+
