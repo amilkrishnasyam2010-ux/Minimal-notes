@@ -88,3 +88,21 @@ function signupUser() {
     .then(res => res.text())
     .then(alert);
 }
+/* ---------- OPEN / CLOSE MODALS ---------- */
+
+function openLogin() {
+  document.getElementById("login-modal").classList.remove("hidden");
+}
+
+function openSignup() {
+  document.getElementById("signup-modal").classList.remove("hidden");
+}
+
+function openChangePassword() {
+  document.getElementById("password-modal").classList.remove("hidden");
+}
+
+function closeModal(id) {
+  document.getElementById(id).classList.add("hidden");
+}
+
