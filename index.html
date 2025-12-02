@@ -9,16 +9,16 @@
 <body>
 
   <!-- TOP BAR -->
-  <header class="top-bar">
+  <header class="top-bar" role="banner">
     <div class="top-left">
       <img src="images/logo.png" alt="Minimal Notes Logo" class="logo" onerror="this.style.display='none'">
-      <span class="sr-only">Minimal Notes</span>
+      <span class="site-title">Minimal Notes</span>
     </div>
 
     <div class="top-right">
       <button id="accountBtn" class="account-btn" aria-haspopup="true" aria-expanded="false">Account ▾</button>
 
-      <!-- dropdown menu - inside top-bar so position works reliably -->
+      <!-- Dropdown menu (hidden by default) -->
       <div id="accountMenu" class="auth-popup hidden" role="menu" aria-hidden="true">
         <button class="menu-item" id="menuLogin">Login</button>
         <button class="menu-item" id="menuSignup">Sign Up</button>
@@ -29,12 +29,12 @@
 
   <!-- HERO -->
   <main>
-    <section class="hero">
+    <section class="hero" role="main">
       <h1>🔥 Minimal Notes</h1>
       <p class="tagline">Free + Premium Exam-Ready Notes — Super Simplified 📘</p>
     </section>
 
-    <!-- features or content here (kept minimal) -->
+    <!-- FEATURES -->
     <section id="features" class="features">
       <h2>Why Minimal Notes?</h2>
       <div class="feature-grid">
@@ -46,30 +46,34 @@
   </main>
 
   <!-- MODALS (hidden by default) -->
+
+  <!-- LOGIN MODAL -->
   <div id="loginModal" class="modal hidden" aria-hidden="true">
-    <div class="modal-content" role="dialog" aria-modal="true">
+    <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="loginTitle">
       <button class="close-modal" data-close="loginModal">×</button>
-      <h2>Login</h2>
+      <h2 id="loginTitle">Login</h2>
       <input id="login-username" placeholder="Username" autocomplete="username" />
       <input id="login-password" type="password" placeholder="Password" autocomplete="current-password" />
       <button id="loginSubmit">Login</button>
     </div>
   </div>
 
+  <!-- SIGNUP MODAL -->
   <div id="signupModal" class="modal hidden" aria-hidden="true">
-    <div class="modal-content" role="dialog" aria-modal="true">
+    <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="signupTitle">
       <button class="close-modal" data-close="signupModal">×</button>
-      <h2>Create Account</h2>
+      <h2 id="signupTitle">Create Account</h2>
       <input id="signup-username" placeholder="Choose username" />
       <input id="signup-password" type="password" placeholder="Choose password" />
       <button id="signupSubmit">Sign Up</button>
     </div>
   </div>
 
+  <!-- CHANGE PASSWORD MODAL -->
   <div id="changePassModal" class="modal hidden" aria-hidden="true">
-    <div class="modal-content" role="dialog" aria-modal="true">
+    <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="changePassTitle">
       <button class="close-modal" data-close="changePassModal">×</button>
-      <h2>Change Password</h2>
+      <h2 id="changePassTitle">Change Password</h2>
       <input id="old-pass" type="password" placeholder="Old password" />
       <input id="new-pass" type="password" placeholder="New password" />
       <button id="changePassSubmit">Save</button>
@@ -79,12 +83,3 @@
   <script src="script.js"></script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
