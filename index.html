@@ -6,6 +6,23 @@
   <title>Minimal Notes</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
+<!-- SUPERLIST STYLE TOP BAR -->
+<header class="top-bar">
+  <div class="left-nav">
+    <img src="images/logo.png" class="nav-logo" alt="Minimal Notes Logo">
+    <span class="brand-name">Minimal Notes</span>
+  </div>
+
+  <div class="right-nav">
+    <button class="nav-btn" onclick="openAccountMenu()">Account ▾</button>
+
+    <!-- Dropdown -->
+    <div id="account-menu" class="dropdown hidden">
+      <button onclick="openLoginModal()">Login</button>
+      <button onclick="openSignupModal()">Sign Up</button>
+    </div>
+  </div>
+</header>
 
 <body>
 
@@ -63,3 +80,4 @@
 </body>
 <script src="script.js"></script>
 </html>
+
