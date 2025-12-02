@@ -1,224 +1,108 @@
-
 body {
   margin: 0;
   font-family: "Poppins", sans-serif;
   background: #f7faff;
+  color: #333;
 }
 
-/* TOP NAV - Superlist Style */
-.top-nav {
+/* ---------------------------------- */
+/* SUPERLIST TOP BAR */
+/* ---------------------------------- */
+
+.top-bar {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background: #ffffff;
   padding: 18px 40px;
-  background: #0d0d17;
-  color: white;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  position: sticky;
+  top: 0;
+  z-index: 10;
 }
 
-.left-nav {
-  display: flex;
-  align-items: center;
-  gap: 12px;
+.logo {
+  height: 42px;
 }
 
-.nav-logo {
-  height: 38px;
-}
-
-.brand-name {
-  font-size: 1.3rem;
-  font-weight: 600;
-}
-
-.right-nav .nav-btn {
-  background: white;
-  color: #333;
-  padding: 10px 18px;
-  font-weight: 600;
-  border-radius: 30px;
+.account-btn {
+  padding: 10px 22px;
+  background: #ffffff;
+  border-radius: 40px;
+  border: 1px solid #ddd;
   cursor: pointer;
-  border: none;
+  font-size: 15px;
+  font-weight: 600;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.05);
 }
 
-/* Dropdown */
 .dropdown {
   position: absolute;
-  top: 70px;
-  right: 45px;
-  background: white;
-  padding: 12px;
+  top: 75px;
+  right: 40px;
+  background: #ffffff;
+  padding: 15px;
   border-radius: 12px;
-  box-shadow: 0 4px 18px rgba(0,0,0,0.2);
+  box-shadow: 0 5px 20px rgba(0,0,0,0.15);
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 10px;
 }
 
 .dropdown button {
-  background: none;
-  border: none;
-  padding: 10px;
-  cursor: pointer;
-  text-align: left;
-  font-size: 1rem;
-}
-
-.hidden {
-  display: none !important;
-}
-
-/* Modal */
-.modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.45);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.modal-box {
-  background: white;
-  padding: 35px;
-  width: 360px;
-  border-radius: 14px;
-  position: relative;
-}
-
-.close {
-  position: absolute;
-  top: 12px;
-  right: 15px;
-  cursor: pointer;
-  font-size: 26px;
-}
-
-.modal-box input {
-  width: 100%;
-  padding: 10px;
-  margin: 8px 0;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-}
-
-.modal-box button {
-  width: 100%;
-  padding: 12px;
-  border: none;
-  background: #007bff;
-  color: white;
-  border-radius: 10px;
-  font-size: 1rem;
-  font-weight: 600;
-  margin-top: 8px;
-  cursor: pointer;
-}
-
-.small-btn {
-  padding: 8px;
-  font-size: 0.9rem;
-}
-
-/* HERO */
-.hero {
-  text-align: center;
-  padding: 70px 20px;
-  color: #111;
-}
-/* ===== MODAL BACKDROP ===== */
-.modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.45);
-  backdrop-filter: blur(6px);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 999;
-}
-
-/* ===== MODAL BOX ===== */
-.modal-content {
+  padding: 10px 14px;
   background: #ffffff;
-  width: 360px;
-  padding: 35px;
-  border-radius: 16px;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.25);
-  animation: popIn 0.25s ease;
-  position: relative;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  cursor: pointer;
   text-align: left;
-}
-
-@keyframes popIn {
-  from { transform: scale(0.8); opacity: 0; }
-  to { transform: scale(1); opacity: 1; }
-}
-
-.modal-content h2 {
-  margin-bottom: 20px;
-  font-weight: 600;
-}
-
-/* ===== CLOSE BUTTON ===== */
-.close-modal {
-  position: absolute;
-  top: 12px;
-  right: 16px;
-  cursor: pointer;
-  font-size: 28px;
-  color: #444;
-}
-
-/* ===== INPUTS ===== */
-.modal-content input {
-  width: 100%;
-  padding: 12px;
-  margin: 12px 0;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  font-size: 15px;
-}
-
-/* ===== BUTTON ===== */
-.modal-content button {
-  width: 100%;
-  padding: 12px;
-  color: white;
-  background: #0066ff;
-  border: none;
-  border-radius: 10px;
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-  margin-top: 10px;
-}
-
-.modal-content button:hover {
-  background: #004ecc;
-}
-
-/* ===== LINKS ===== */
-.modal-link {
-  margin-top: 14px;
-  color: #0066ff;
-  cursor: pointer;
-  font-size: 14px;
-  text-align: center;
-}
-
-.modal-link:hover {
-  text-decoration: underline;
 }
 
 .hidden {
   display: none !important;
 }
 
+/* ---------------------------------- */
+/* HERO SECTION */
+/* ---------------------------------- */
 
+.hero {
+  padding: 120px 20px;
+  text-align: center;
+  background: linear-gradient(135deg, #007bff, #004080);
+  color: white;
+}
 
+.hero h1 {
+  font-size: 3rem;
+  margin: 0;
+}
+
+.hero .tagline {
+  font-size: 1.3rem;
+  opacity: 0.9;
+}
+
+/* ---------------------------------- */
+/* FEATURES */
+/* ---------------------------------- */
+
+.features {
+  padding: 60px 20px;
+  background: #fff;
+}
+
+.features h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.sub {
+  opacity: 0.7;
+  margin-bottom: 35px;
+}
+
+.feature-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content
