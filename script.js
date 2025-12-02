@@ -1,117 +1,132 @@
-/* ---------- ACCESS BACKEND URL (if used elsewhere) ----------
-  Add your BACKEND_URL constant above if your code verification needs it:
-  const BACKEND_URL = "https://script.google.com/macros/s/xxxxx/exec";
+/* ------------------ BACKEND URL ------------------
+ Replace with your deployed Google Apps Script web app if different.
 */
+const BACKEND_URL = "https://script.google.com/macros/s/AKfycbwFEbrYyAoOIzQ0cIJBAFZRDWSM5HjD6I2_KcSVObupz8ER1O6mjllhqAEpH0Ohv0eKHQ/exec";
 
+/* IIFE to avoid polluting global scope too much */
 (function () {
-  // elements
+  // Elements
   const accountBtn = document.getElementById("accountBtn");
   const accountMenu = document.getElementById("accountMenu");
   const loginModal = document.getElementById("loginModal");
   const signupModal = document.getElementById("signupModal");
   const changePassModal = document.getElementById("changePassModal");
 
-  // menu toggling
+  // Toggle dropdown menu
   window.toggleAccountMenu = function () {
+    if (!accountMenu) return;
     accountMenu.classList.toggle("hidden");
-    accountBtn.setAttribute("aria-expanded", !accountMenu.classList.contains("hidden"));
+    const expanded = accountMenu.classList.contains("hidden") ? "false" : "true";
+    accountBtn.setAttribute("aria-expanded", expanded);
   };
 
-  // open modal by id
+  // Open a modal by id (hides dropdown)
   window.openModal = function (id) {
-    // hide all modals first
-    [loginModal, signupModal, changePassModal].forEach(m => m.classList.add("hidden"));
-    // close dropdown
-    accountMenu.classList.add("hidden");
-    // show requested
+    // Hide dropdown
+    if (accountMenu) accountMenu.classList.add("hidden");
+
+    // Hide all modals first
+    [loginModal, signupModal, changePassModal].forEach(m => {
+      if (m) m.classList.add("hidden");
+    });
+
     const modal = document.getElementById(id);
     if (modal) modal.classList.remove("hidden");
   };
 
-  // close modal by id (used by close buttons)
+  // Close modal by id
   window.closeModal = function (id) {
     const modal = document.getElementById(id);
     if (modal) modal.classList.add("hidden");
   };
 
-  // close menus/modals when clicking outside
+  // Clicks outside: close dropdown and modals (unless clicking inside)
   document.addEventListener("click", (e) => {
     const target = e.target;
-    // if clicked account button/menu -> do nothing (menu toggle handles it)
-    if (target === accountBtn || accountBtn.contains(target) || accountMenu.contains(target)) return;
+    if (!accountBtn || !accountMenu) return;
 
-    // if clicked inside any modal content do nothing
-    if (target.closest && (target.closest(".modal-content"))) return;
+    // If clicked the account button or inside menu, ignore
+    if (accountBtn.contains(target) || accountMenu.contains(target)) return;
 
-    // otherwise hide dropdown + modals
+    // If clicked inside a modal-content, ignore
+    if (target.closest && target.closest(".modal-content")) return;
+
+    // Otherwise close
     accountMenu.classList.add("hidden");
   });
 
-  // wire up menu buttons to open modals
-  document.getElementById("menuLogin").addEventListener("click", () => openModal("loginModal"));
-  document.getElementById("menuSignup").addEventListener("click", () => openModal("signupModal"));
-  document.getElementById("menuChangePass").addEventListener("click", () => openModal("changePassModal"));
+  // Wire dropdown menu buttons -> open modals
+  const menuLogin = document.getElementById("menuLogin");
+  const menuSignup = document.getElementById("menuSignup");
+  const menuChangePass = document.getElementById("menuChangePass");
 
-  // close buttons in modals
+  if (menuLogin) menuLogin.addEventListener("click", () => openModal("loginModal"));
+  if (menuSignup) menuSignup.addEventListener("click", () => openModal("signupModal"));
+  if (menuChangePass) menuChangePass.addEventListener("click", () => openModal("changePassModal"));
+
+  // Close buttons in modals
   document.querySelectorAll(".close-modal").forEach(btn => {
-    btn.addEventListener("click", (e) => {
+    btn.addEventListener("click", () => {
       const id = btn.getAttribute("data-close");
       if (id) closeModal(id);
       else {
-        // if data-close missing, traverse to parent modal id attribute
-        let modal = btn.closest(".modal");
+        const modal = btn.closest(".modal");
         if (modal && modal.id) modal.classList.add("hidden");
       }
     });
   });
 
-  /* ---------- AUTH ACTIONS (localStorage simple) ---------- */
-  // signup
-  document.getElementById("signupSubmit").addEventListener("click", () => {
-    const u = document.getElementById("signup-username").value.trim().toLowerCase();
-    const p = document.getElementById("signup-password").value.trim();
-    if (!u || !p) return alert("Please fill in all fields.");
-    if (localStorage.getItem(u)) return alert("User already exists.");
-    localStorage.setItem(u, JSON.stringify({ password: p, downloads: [] }));
-    alert("Account created.");
-    closeModal("signupModal");
-  });
-
-  // login
-  document.getElementById("loginSubmit").addEventListener("click", () => {
-    const u = document.getElementById("login-username").value.trim().toLowerCase();
-    const p = document.getElementById("login-password").value.trim();
-    const raw = localStorage.getItem(u);
-    if (!raw) return alert("User not found.");
-    const user = JSON.parse(raw);
-    if (user.password !== p) return alert("Wrong password.");
-    localStorage.setItem("loggedIn", u);
-    // after login, close modal and optionally refresh or redirect
-    closeModal("loginModal");
-    // redirect to dashboard if that exists
-    window.location.href = "dashboard.html";
-  });
-
-  // change password (modal)
-  document.getElementById("changePassSubmit").addEventListener("click", () => {
-    const logged = localStorage.getItem("loggedIn");
-    if (!logged) return alert("Please login first.");
-    const oldP = document.getElementById("old-pass").value.trim();
-    const newP = document.getElementById("new-pass").value.trim();
-    if (!oldP || !newP) return alert("Fill all fields.");
-    const user = JSON.parse(localStorage.getItem(logged));
-    if (user.password !== oldP) return alert("Old password incorrect.");
-    user.password = newP;
-    localStorage.setItem(logged, JSON.stringify(user));
-    alert("Password updated.");
-    closeModal("changePassModal");
-  });
-
-  // prevent double form submissions if user presses Enter in inputs
+  // Prevent Enter from submitting forms accidentally
   document.querySelectorAll("input").forEach(input => {
     input.addEventListener("keydown", (e) => {
       if (e.key === "Enter") e.preventDefault();
     });
   });
 
-})(); // end IIFE
+  /* -------------- AUTH: Signup/Login/Change Password -------------- */
+
+  // Signup
+  const signupSubmit = document.getElementById("signupSubmit");
+  if (signupSubmit) {
+    signupSubmit.addEventListener("click", () => {
+      const uEl = document.getElementById("signup-username");
+      const pEl = document.getElementById("signup-password");
+      const u = uEl ? uEl.value.trim().toLowerCase() : "";
+      const p = pEl ? pEl.value.trim() : "";
+      if (!u || !p) return alert("Please fill in all fields.");
+      if (localStorage.getItem(u)) return alert("User already exists.");
+      localStorage.setItem(u, JSON.stringify({ password: p, downloads: [] }));
+      alert("Account created. You can now log in.");
+      closeModal("signupModal");
+    });
+  }
+
+  // Login
+  const loginSubmit = document.getElementById("loginSubmit");
+  if (loginSubmit) {
+    loginSubmit.addEventListener("click", () => {
+      const uEl = document.getElementById("login-username");
+      const pEl = document.getElementById("login-password");
+      const u = uEl ? uEl.value.trim().toLowerCase() : "";
+      const p = pEl ? pEl.value.trim() : "";
+      if (!u || !p) return alert("Please fill in all fields.");
+      const raw = localStorage.getItem(u);
+      if (!raw) return alert("User not found.");
+      const user = JSON.parse(raw);
+      if (user.password !== p) return alert("Wrong password.");
+      localStorage.setItem("loggedIn", u);
+      closeModal("loginModal");
+      // redirect to dashboard
+      window.location.href = "dashboard.html";
+    });
+  }
+
+  // Change Password (inside modal)
+  const changePassSubmit = document.getElementById("changePassSubmit");
+  if (changePassSubmit) {
+    changePassSubmit.addEventListener("click", () => {
+      const logged = localStorage.getItem("loggedIn");
+      if (!logged) return alert("Please log in first.");
+      const oldP = document.getElementById("old-pass").value.trim();
+      const newP = document.getElementById("new-pass").value.trim();
+      if (!oldP || !newP) return alert("Please fill in all fields.");
