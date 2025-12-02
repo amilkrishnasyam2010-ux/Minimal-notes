@@ -9,10 +9,11 @@ body {
   -webkit-font-smoothing:antialiased;
 }
 
-/* Hidden utility */
+/* Utility */
 .hidden { display: none !important; }
+.sr-only { position:absolute; left:-9999px; top:auto; width:1px; height:1px; overflow:hidden; }
 
-/* Top bar (fixed) */
+/* Top bar */
 .top-bar {
   position: fixed;
   top: 0;
@@ -29,7 +30,7 @@ body {
 }
 .top-left { display:flex; align-items:center; gap:12px; }
 .logo { height:42px; display:block; }
-.site-title { font-weight:700; color:#0b2a66; display:none; } /* hidden if using logo */
+.site-title { font-weight:700; color:#0b2a66; display:none; }
 
 /* account button & dropdown */
 .top-right { position: relative; display:flex; align-items:center; gap:8px; }
@@ -44,12 +45,12 @@ body {
 }
 .account-btn:focus { outline: 3px solid rgba(0,123,255,0.12); }
 
-/* dropdown menu inside top-bar */
+/* dropdown menu */
 .auth-popup {
   position: absolute;
   top: 56px;
   right: 0;
-  min-width: 160px;
+  min-width: 180px;
   background: #fff;
   padding: 8px;
   border-radius: 10px;
@@ -71,13 +72,23 @@ body {
 
 /* Hero */
 .hero {
-  padding: 120px 20px 60px; /* leaves space for top bar */
+  padding: 120px 20px 60px;
   text-align: center;
   background: linear-gradient(135deg,#007bff,#004080);
   color: white;
 }
 .hero h1 { font-size:2.6rem; margin:0 0 8px; }
 .tagline { opacity:0.95; margin:0 0 14px; }
+.cta {
+  display:inline-block;
+  background:white;
+  color:#004080;
+  padding:10px 18px;
+  border-radius:25px;
+  text-decoration:none;
+  font-weight:600;
+  margin-top:12px;
+}
 
 /* Features */
 .features { padding:48px 20px; background:#fff; text-align:center; }
@@ -137,9 +148,6 @@ body {
   font-weight:600;
   cursor:pointer;
 }
-
-/* Accessibility helper */
-.sr-only { position:absolute; left:-9999px; top:auto; width:1px; height:1px; overflow:hidden; }
 
 /* Responsive */
 @media (max-width:520px){
