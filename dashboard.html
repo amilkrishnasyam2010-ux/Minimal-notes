@@ -6,51 +6,41 @@
   <title>Dashboard - Minimal Notes</title>
   <link rel="stylesheet" href="style.css" />
 </head>
-
 <body>
-  <!-- Header -->
+
+  <!-- TOP BAR (same style as homepage) -->
+  <div class="top-bar">
+    <img src="logo.png" class="logo" alt="Logo">
+
+    <div class="right-side">
+      <button class="account-btn" onclick="logoutUser()">Logout</button>
+    </div>
+  </div>
+
   <header class="small-header">
-    <h1>Welcome, <span id="user-name"></span> 👋</h1>
-    <button onclick="logoutUser()" class="logout-btn">🚪 Logout</button>
+    <h1>Welcome, <span id="user-name"></span> </h1>
   </header>
 
-  <!-- Main Dashboard -->
   <main class="dashboard">
-    <!-- Section: Downloads -->
-    <section class="fade-in">
-      <h2>📥 Your Downloads</h2>
+    <section>
+      <h2>Your Downloads</h2>
       <ul id="downloaded-list">No notes downloaded yet.</ul>
     </section>
 
-    <!-- Section: Explore Options -->
-    <section class="fade-in">
-      <h2>📚 Explore Resources</h2>
+    <section>
+      <h2>Explore</h2>
       <div class="dashboard-btns">
-        <button onclick="goTo('notes')">🗒️ Notes</button>
-        <button onclick="goTo('questions')">❓ Question Bank</button>
-        <button onclick="goTo('oneword')">🧩 One Word</button>
+        <button onclick="goTo('notes')"> Notes</button>
+        <button onclick="goTo('questions')"> Question Bank</button>
+        <button onclick="goTo('oneword')"> One Word</button>
       </div>
-  <button class="change-pass-btn" onclick="showChangePassword()">🔐 Change Password</button>
-
-<div id="change-password-box" class="hidden change-pass-box">
-  <h3>Change Password</h3>
-  <input type="password" id="old-pass" placeholder="Old Password">
-  <input type="password" id="new-pass" placeholder="New Password">
-  <input type="password" id="confirm-pass" placeholder="Confirm Password">
-  <button onclick="updatePassword()">Save Password</button>
-  <button onclick="closeChangePassword()" class="close-btn">Cancel</button>
-</div>
-    
     </section>
   </main>
 
-  <!-- Footer -->
   <footer>
-    <p>© 2025 Minimal Notes | Simplifying Learning</p>
+    <p>© 2025 Minimal Notes</p>
   </footer>
 
-  <!-- Script -->
   <script src="script.js"></script>
 </body>
 </html>
-
