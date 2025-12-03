@@ -56,8 +56,8 @@ function submitPasswordChange() {
     .then(alert);
 }
 
-/* ------------ SIGN IN FUNCTION ------------- */
-function sign inUser() {
+/* ------------ LOG IN FUNCTION ------------- */
+function log inUser() {
   const user = document.getElementById("modal-username").value;
   const pass = document.getElementById("modal-password").value;
 
@@ -68,7 +68,7 @@ function sign inUser() {
         alert("Logged in!");
         closeModal();
       } else {
-        alert("Incorrect sign in");
+        alert("Incorrect login");
       }
     });
 }
@@ -143,6 +143,7 @@ function openLogin() {
 function closeModal(id) {
   document.getElementById(id).classList.add("hidden");
 }
+
 
 
 
