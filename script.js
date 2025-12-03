@@ -27,7 +27,7 @@ function openLoginModal() {
   document.getElementById("confirm-password-box").classList.add("hidden");
   document.getElementById("open-change-pass").classList.remove("hidden");
 
-  document.getElementById("modal-action-btn").onclick = SigninUser;
+  document.getElementById("modal-action-btn").onclick = LoginUser;
 }
 
 /* ------------ SIGNUP MODAL ------------- */
@@ -143,6 +143,7 @@ function openLogin() {
 function closeModal(id) {
   document.getElementById(id).classList.add("hidden");
 }
+
 
 
 
