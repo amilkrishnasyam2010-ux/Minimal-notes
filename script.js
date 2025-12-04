@@ -9,12 +9,16 @@ function toggleAccountMenu() {
 /* ---------------- MODALS ---------------- */
 function openLogin() {
   closeModal();
+  document.getElementById("account-menu").classList.add("hidden"); // FIX 1
   document.getElementById("login-modal").classList.remove("hidden");
 }
+
 function openSignup() {
   closeModal();
+  document.getElementById("account-menu").classList.add("hidden"); // FIX 2
   document.getElementById("signup-modal").classList.remove("hidden");
 }
+
 function closeModal() {
   document.getElementById("login-modal").classList.add("hidden");
   document.getElementById("signup-modal").classList.add("hidden");
@@ -27,7 +31,10 @@ async function signupUser() {
 
   if (!user || !pass) return alert("Fill all fields");
 
-  localStorage.setItem(user.toLowerCase(), JSON.stringify({ password: pass, downloads: [] }));
+  localStorage.setItem(
+    user.toLowerCase(),
+    JSON.stringify({ password: pass, downloads: [] })
+  );
 
   alert("Account created");
   closeModal();
