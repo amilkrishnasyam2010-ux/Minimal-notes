@@ -1,151 +1,83 @@
-/* ------------------------------------
-   BACKEND URL (Google Apps Script)
------------------------------------- */
-const BACKEND_URL = "https://script.google.com/macros/s/AKfycbyydVvtQesLYECTNOyP3UIeTUeJyxaw51SMyegrelp-T6ZDzjWDYMKmlJQVFcY70UmzEQ/exec";
+/**************** SETTINGS ****************/
+const BACKEND_URL =
+  "https://script.google.com/macros/s/AKfycbyydVvtQesLYECTNOyP3UIeTUeJyxaw51SMyegrelp-T6ZDzjWDYMKmlJQVFcY70UmzEQ/exec";
 
-/* ------------ DROPDOWN ------------- */
-function toggleAccountMenu() {
-  document.getElementById("account-menu").classList.toggle("hidden");
-}
+/**************** UI ELEMENTS ****************/
+const accountBtn = document.getElementById("account-btn");
+const dropdown = document.getElementById("account-dropdown");
 
-/* ------------ MODAL CONTROL ------------- */
-function closeModal() {
-  document.getElementById("auth-modal").classList.add("hidden");
-  document.getElementById("change-pass-section").classList.add("hidden");
-}
+const loginModal = document.getElementById("login-modal");
+const signupModal = document.getElementById("signup-modal");
+const changePassModal = document.getElementById("change-pass-modal");
 
-function openModal() {
-  document.getElementById("auth-modal").classList.remove("hidden");
-  document.getElementById("account-menu").classList.add("hidden");
-}
-
-/* ------------ LOGIN MODAL ------------- */
-function openLoginModal() {
-  openModal();
-  document.getElementById("modal-title").innerText = "Login";
-  document.getElementById("modal-action-btn").innerText = "Login";
-  document.getElementById("confirm-password-box").classList.add("hidden");
-  document.getElementById("open-change-pass").classList.remove("hidden");
-
-  document.getElementById("modal-action-btn").onclick = LoginUser;
-}
-
-/* ------------ SIGNUP MODAL ------------- */
-function openSignupModal() {
-  openModal();
-  document.getElementById("modal-title").innerText = "Create Account";
-  document.getElementById("modal-action-btn").innerText = "Sign Up";
-  document.getElementById("confirm-password-box").classList.remove("hidden");
-  document.getElementById("open-change-pass").classList.add("hidden");
-
-  document.getElementById("modal-action-btn").onclick = signupUser;
-}
-
-/* ------------ CHANGE PASSWORD ------------- */
-function showChangePass() {
-  document.getElementById("change-pass-section").classList.toggle("hidden");
-}
-
-function submitPasswordChange() {
-  const user = document.getElementById("modal-username").value;
-  const oldPass = document.getElementById("old-pass").value;
-  const newPass = document.getElementById("new-pass").value;
-
-  fetch(BACKEND_URL + "?action=changePassword&username=" + user + "&old=" + oldPass + "&new=" + newPass)
-    .then(res => res.text())
-    .then(alert);
-}
-
-/* ------------ LOG IN FUNCTION ------------- */
-function log inUser() {
-  const user = document.getElementById("modal-username").value;
-  const pass = document.getElementById("modal-password").value;
-
-  fetch(BACKEND_URL + "?action=login&username=" + user + "&password=" + pass)
-    .then(res => res.text())
-    .then(result => {
-      if (result === "success") {
-        alert("Logged in!");
-        closeModal();
-      } else {
-        alert("Incorrect login");
-      }
-    });
-}
-
-/* ------------ SIGNUP FUNCTION ------------- */
-function signupUser() {
-  const user = document.getElementById("modal-username").value;
-  const pass = document.getElementById("modal-password").value;
-  const confirm = document.getElementById("modal-confirm").value;
-
-  if (pass !== confirm) {
-    alert("Passwords do not match!");
-    return;
-  }
-
-  fetch(BACKEND_URL + "?action=signup&username=" + user + "&password=" + pass)
-    .then(res => res.text())
-    .then(alert);
-}
-/* ---------- OPEN / CLOSE MODALS ---------- */
-
-function openLogin() {
-  document.getElementById("login-modal").classList.remove("hidden");
-}
-
-function openSignup() {
-  document.getElementById("signup-modal").classList.remove("hidden");
-}
-
-function openChangePassword() {
-  document.getElementById("password-modal").classList.remove("hidden");
-}
-
-function closeModal(id) {
-  document.getElementById(id).classList.add("hidden");
-}
-/* ---------- OPEN / CLOSE MODALS ---------- */
-
-function openLogin() {
-  document.getElementById("login-modal").classList.remove("hidden");
-}
-
-function openSignup() {
-  document.getElementById("signup-modal").classList.remove("hidden");
-}
-
-function openChangePassword() {
-  document.getElementById("password-modal").classList.remove("hidden");
-}
-
-function closeModal(id) {
-  document.getElementById(id).classList.add("hidden");
-}
-// --- FIX LOGIN POPUP ---
-document.getElementById("account-btn").addEventListener("click", () => {
-  document.getElementById("auth-popup").classList.toggle("hidden");
+/**************** DROPDOWN ****************/
+accountBtn.addEventListener("click", () => {
+  dropdown.classList.toggle("hidden");
 });
 
-// Open Sign-up modal
-function openSignup() {
-  document.getElementById("auth-popup").classList.add("hidden");
-  document.getElementById("signup-modal").classList.remove("hidden");
+/**************** OPEN MODALS ****************/
+document.getElementById("open-login").onclick = () => {
+  dropdown.classList.add("hidden");
+  loginModal.classList.remove("hidden");
+};
+
+document.getElementById("open-signup").onclick = () => {
+  dropdown.classList.add("hidden");
+  signupModal.classList.remove("hidden");
+};
+
+document.getElementById("open-change-pass").onclick = () => {
+  dropdown.classList.add("hidden");
+  changePassModal.classList.remove("hidden");
+};
+
+/**************** CLOSE MODALS ****************/
+document.querySelectorAll(".close-modal").forEach(close => {
+  close.addEventListener("click", (e) => {
+    const target = e.target.getAttribute("data-close");
+    document.getElementById(target).classList.add("hidden");
+  });
+});
+
+/**************** AUTH FUNCTIONS ****************/
+async function signupUser() {
+  let user = document.getElementById("signup-user").value.trim().toLowerCase();
+  let pass = document.getElementById("signup-pass").value.trim();
+
+  if (!user || !pass) return alert("Fill all fields.");
+
+  const res = await fetch(BACKEND_URL + "?action=signup&user=" + user + "&pass=" + pass);
+  const msg = await res.text();
+
+  alert(msg);
 }
 
-// Open Login modal
-function openLogin() {
-  document.getElementById("auth-popup").classList.add("hidden");
-  document.getElementById("login-modal").classList.remove("hidden");
+async function loginUser() {
+  let user = document.getElementById("login-user").value.trim().toLowerCase();
+  let pass = document.getElementById("login-pass").value.trim();
+
+  const res = await fetch(BACKEND_URL + "?action=login&user=" + user + "&pass=" + pass);
+  const msg = await res.text();
+
+  if (msg === "success") {
+    localStorage.setItem("loggedIn", user);
+    window.location.href = "dashboard.html";
+  } else {
+    alert(msg);
+  }
 }
 
-// Close modal
-function closeModal(id) {
-  document.getElementById(id).classList.add("hidden");
+async function changePassword() {
+  let user = localStorage.getItem("loggedIn");
+  if (!user) return alert("Please login first.");
+
+  let oldp = document.getElementById("old-pass").value.trim();
+  let newp = document.getElementById("new-pass").value.trim();
+
+  const res = await fetch(
+    BACKEND_URL + `?action=changePass&user=${user}&old=${oldp}&new=${newp}`
+  );
+
+  const msg = await res.text();
+  alert(msg);
 }
-
-
-
-
-
-
