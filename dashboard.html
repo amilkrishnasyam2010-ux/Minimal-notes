@@ -4,35 +4,43 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Dashboard - Minimal Notes</title>
-  <link rel="stylesheet" href="style.css" />
+
+  <!-- MUST match homepage filename -->
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
 
-  <!-- TOP BAR (same style as homepage) -->
-  <div class="top-bar">
-    <img src="logo.png" class="logo" alt="Logo">
+  <!-- TOP NAV BAR -->
+  <header class="top-nav">
+    <div class="left-nav">
+      <img src="images/logo.png" class="nav-logo" alt="Logo">
+      <span class="brand-name">Minimal Notes</span>
+    </div>
 
-    <div class="right-side">
+    <div class="right-nav">
       <button class="account-btn" onclick="logoutUser()">Logout</button>
     </div>
-  </div>
+  </header>
 
-  <header class="small-header">
-    <h1>Welcome, <span id="user-name"></span> </h1>
+  <!-- DASHBOARD HEADER -->
+  <header class="small-header" style="margin-top:100px;">
+    <h1>Welcome, <span id="user-name"></span> 👋</h1>
   </header>
 
   <main class="dashboard">
+    <!-- DOWNLOADS SECTION -->
     <section>
       <h2>Your Downloads</h2>
       <ul id="downloaded-list">No notes downloaded yet.</ul>
     </section>
 
+    <!-- EXPLORE SECTION -->
     <section>
       <h2>Explore</h2>
       <div class="dashboard-btns">
-        <button onclick="goTo('notes')"> Notes</button>
-        <button onclick="goTo('questions')"> Question Bank</button>
-        <button onclick="goTo('oneword')"> One Word</button>
+        <button onclick="goTo('notes')">🗒️ Notes</button>
+        <button onclick="goTo('questions')">❓ Question Bank</button>
+        <button onclick="goTo('oneword')">🧩 One Word</button>
       </div>
     </section>
   </main>
