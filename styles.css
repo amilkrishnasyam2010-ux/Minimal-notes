@@ -1,181 +1,136 @@
-/* ---------- RESET ---------- */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
 body {
+  margin: 0;
   font-family: "Poppins", sans-serif;
   background: #f7faff;
-  color: #222;
-  min-height: 100vh;
 }
 
-/* ---------- TOP NAV (Superlist style) ---------- */
+/* TOP NAV */
 .top-nav {
-  width: 100%;
-  height: 72px;
-  background: #11131c;
-  color: white;
-
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  padding: 0 40px;
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 1000;
-
-  box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 40px;
+  background: white;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+  z-index: 100;
 }
 
 .left-nav {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
 }
 
 .nav-logo {
-  height: 38px;
-  width: auto;
+  height: 42px;
 }
 
 .brand-name {
   font-size: 1.4rem;
-  font-weight: 600;
+  font-weight: 700;
 }
 
-.right-nav {
-  display: flex;
-  align-items: center;
-  gap: 18px;
-}
-
-.nav-btn {
-  padding: 10px 22px;
-  background: #ffffff22;
-  border: none;
-  border-radius: 40px;
-  color: white;
-  font-size: 0.95rem;
+.account-btn {
+  padding: 10px 20px;
+  border-radius: 30px;
+  background: white;
+  border: 1px solid #ddd;
   cursor: pointer;
-  backdrop-filter: blur(6px);
-  transition: 0.2s;
 }
 
-.nav-btn:hover {
-  background: #ffffff44;
+.account-dropdown {
+  position: absolute;
+  top: 70px;
+  right: 40px;
+  background: white;
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  z-index: 200;
 }
 
-.nav-btn.highlight {
-  background: #ff3b2f;
-  font-weight: 600;
+.hidden {
+  display: none !important;
 }
 
-.nav-btn.highlight:hover {
-  background: #ff5b4f;
-}
-
-/* ---------- HERO ---------- */
+/* HERO */
 .hero {
-  padding-top: 130px;
-  padding-bottom: 80px;
+  padding: 120px 20px 80px;
   text-align: center;
   background: linear-gradient(135deg, #007bff, #004080);
   color: white;
 }
 
 .hero h1 {
-  font-size: 2.8rem;
-  margin-bottom: 10px;
+  font-size: 3rem;
+  margin: 0;
 }
 
-.tagline {
-  font-size: 1.1rem;
-  opacity: 0.9;
-}
-
-/* ---------- FEATURES ---------- */
+/* FEATURES */
 .features {
   padding: 60px 20px;
-  text-align: center;
-}
-
-.features h2 {
-  font-size: 2rem;
-  margin-bottom: 40px;
 }
 
 .feature-grid {
   display: flex;
-  gap: 20px;
   justify-content: center;
-  flex-wrap: wrap;
+  gap: 20px;
 }
 
 .feature-card {
-  width: 260px;
-  padding: 22px;
   background: white;
-  border-radius: 14px;
-  box-shadow: 0 0 12px rgba(0,0,0,0.08);
-  font-size: 1rem;
-  transition: 0.25s;
+  padding: 20px;
+  border-radius: 12px;
+  width: 200px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.08);
 }
 
-.feature-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 4px 25px rgba(0,0,0,0.15);
-}
-
-/* ---------- MODALS (login/signup) ---------- */
+/* MODAL */
 .modal {
   position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.45);
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.4);
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 5000;
 }
 
 .modal-content {
-  background: #fff;
-  padding: 35px;
-  border-radius: 16px;
+  background: white;
+  padding: 30px;
   width: 340px;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.2);
-  animation: pop 0.25s ease;
-}
-
-@keyframes pop {
-  from { transform: scale(0.85); opacity: 0; }
-  to { transform: scale(1); opacity: 1; }
+  border-radius: 12px;
 }
 
 .modal-content input {
   width: 100%;
   padding: 12px;
-  margin: 12px 0;
-  border: 1px solid #ccc;
-  border-radius: 10px;
+  margin: 10px 0;
 }
 
-.modal-content button {
+.close-modal {
+  float: right;
+  cursor: pointer;
+  font-size: 30px;
+}
+
+.change-pass-btn {
   width: 100%;
-  padding: 12px;
-  margin-top: 8px;
-  border-radius: 10px;
-  background: #007bff;
+  padding: 10px;
+  background: #ff9800;
   color: white;
   border: none;
-  cursor: pointer;
-  font-weight: 600;
+  border-radius: 8px;
 }
 
-.hidden {
-  display: none !important;
+#change-pass-box input {
+  width: 100%;
 }
