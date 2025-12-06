@@ -22,8 +22,10 @@ body {
 .right-nav {
   display: flex;
   align-items: center;
-  gap: 10px;
+  justify-content: flex-end;
+  width: auto;
 }
+
 
 
 .left-nav {
@@ -151,6 +153,7 @@ body {
 #change-pass-box input {
   width: 100%;
 }
+
 
 
 
