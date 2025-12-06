@@ -75,3 +75,12 @@ function changePassword() {
   alert("Password changed");
   closeModal();
 }
+function goTo(section) {
+  if (section === "notes") window.location.href = "notes.html";
+  if (section === "questions") window.location.href = "questions.html";
+  if (section === "oneword") window.location.href = "oneword.html";
+}
+function goBackDashboard() {
+   window.location.href = "dashboard.html";
+}
+
