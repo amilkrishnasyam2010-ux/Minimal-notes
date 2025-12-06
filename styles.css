@@ -13,11 +13,21 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 18px 40px;
+  padding: 18px 20px;   /* reduced from 40px → moves button left */
   background: white;
   box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-  z-index: 200;
+  z-index: 100;
 }
+
+.account-btn {
+  padding: 10px 20px;
+  border-radius: 30px;
+  background: white;
+  border: 1px solid #ddd;
+  cursor: pointer;
+  margin-right: 10px;   /* pull it inside a bit more */
+}
+
 
 .left-nav {
   display: flex;
@@ -159,4 +169,5 @@ body {
 #change-pass-box input {
   width: 100%;
 }
+
 
