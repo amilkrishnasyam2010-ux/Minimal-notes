@@ -1,7 +1,7 @@
 const BACKEND_URL =
   "https://script.google.com/macros/s/AKfycbyydVvtQesLYECTNOyP3UIeTUeJyxaw51SMyegrelp-T6ZDzjWDYMKmlJQVFcY70UmzEQ/exec";
 
-/* ---------------- ACCOUNT DROPDOWN ---------------- */
+/* ---------------- ACCOUNT MENU ---------------- */
 function toggleAccountMenu() {
   document.getElementById("account-menu").classList.toggle("hidden");
 }
@@ -9,13 +9,11 @@ function toggleAccountMenu() {
 /* ---------------- MODALS ---------------- */
 function openLogin() {
   closeModal();
-  document.getElementById("account-menu").classList.add("hidden"); // FIX 1
   document.getElementById("login-modal").classList.remove("hidden");
 }
 
 function openSignup() {
   closeModal();
-  document.getElementById("account-menu").classList.add("hidden"); // FIX 2
   document.getElementById("signup-modal").classList.remove("hidden");
 }
 
@@ -25,18 +23,14 @@ function closeModal() {
 }
 
 /* ---------------- SIGNUP ---------------- */
-async function signupUser() {
-  const user = document.getElementById("signup-username").value.trim();
+function signupUser() {
+  const user = document.getElementById("signup-username").value.trim().toLowerCase();
   const pass = document.getElementById("signup-password").value.trim();
 
   if (!user || !pass) return alert("Fill all fields");
 
-  localStorage.setItem(
-    user.toLowerCase(),
-    JSON.stringify({ password: pass, downloads: [] })
-  );
-
-  alert("Account created");
+  localStorage.setItem(user, JSON.stringify({ password: pass, downloads: [] }));
+  alert("Account created!");
   closeModal();
 }
 
@@ -52,7 +46,7 @@ function loginUser() {
   if (data.password !== pass) return alert("Wrong password");
 
   localStorage.setItem("loggedIn", user);
-  window.location.href = "./dashboard.html";
+  window.location.href = "dashboard.html";
 }
 
 /* ---------------- CHANGE PASSWORD ---------------- */
@@ -66,21 +60,21 @@ function changePassword() {
   const newp = document.getElementById("new-pass").value.trim();
 
   const saved = JSON.parse(localStorage.getItem(user));
-
-  if (saved.password !== oldp) return alert("Old password wrong");
+  if (saved.password !== oldp) return alert("Old password incorrect");
 
   saved.password = newp;
   localStorage.setItem(user, JSON.stringify(saved));
-
   alert("Password changed");
   closeModal();
 }
-function goTo(section) {
-  if (section === "notes") window.location.href = "notes.html";
-  if (section === "questions") window.location.href = "questions.html";
-  if (section === "oneword") window.location.href = "oneword.html";
-}
-function goBackDashboard() {
-   window.location.href = "dashboard.html";
+
+/* ---------------- DASHBOARD NAVIGATION ---------------- */
+function goTo(page) {
+  if (page === "notes") window.location.href = "notes.html";
+  if (page === "questions") window.location.href = "questions.html";
+  if (page === "oneword") window.location.href = "oneword.html";
 }
 
+function goBackDashboard() {
+  window.location.href = "dashboard.html";
+}
