@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Minimal Notes</title>
 
-  <!-- Stylesheet -->
+  <!-- Correct CSS path -->
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
@@ -13,14 +13,14 @@
   <!-- TOP NAV -->
   <header class="top-nav">
     <div class="left-nav">
-      <img src="images/logo.png" class="nav-logo" alt="Logo">
+      <img src="images/logo.png" class="nav-logo" alt="Minimal Notes Logo">
       <span class="brand-name">Minimal Notes</span>
     </div>
 
     <div class="right-nav">
       <button class="account-btn" onclick="toggleAccountMenu()">Account</button>
 
-      <!-- Dropdown -->
+      <!-- Account dropdown -->
       <div id="account-menu" class="account-dropdown hidden">
         <button onclick="openLogin()">Login</button>
         <button onclick="openSignup()">Sign Up</button>
@@ -28,10 +28,11 @@
     </div>
   </header>
 
+  <!-- MAIN CONTENT -->
   <main style="padding-top:120px;">
     <section class="hero">
       <h1>One place for all your learning</h1>
-      <p class="tagline">Notes, question banks & one-word answers — always organized.</p>
+      <p class="tagline">Notes, question banks & one-word answers — organized beautifully.</p>
     </section>
 
     <section class="features">
@@ -49,11 +50,13 @@
     <div class="modal-content">
       <span class="close-modal" onclick="closeModal()">×</span>
       <h2>Login</h2>
+
       <input id="login-username" placeholder="Username">
       <input id="login-password" type="password" placeholder="Password">
       <button onclick="loginUser()">Login</button>
 
       <hr>
+
       <button class="change-pass-btn" onclick="showChangePass()">Change Password</button>
 
       <div id="change-pass-box" class="hidden">
@@ -69,12 +72,14 @@
     <div class="modal-content">
       <span class="close-modal" onclick="closeModal()">×</span>
       <h2>Sign Up</h2>
-      <input id="signup-username" placeholder="Choose a Username">
-      <input id="signup-password" type="password" placeholder="Choose a Password">
+
+      <input id="signup-username" placeholder="Create Username">
+      <input id="signup-password" type="password" placeholder="Create Password">
       <button onclick="signupUser()">Sign Up</button>
     </div>
   </div>
 
+  <!-- SCRIPT -->
   <script src="script.js"></script>
 </body>
 </html>
