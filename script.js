@@ -78,3 +78,26 @@ function goTo(page) {
 function goBackDashboard() {
   window.location.href = "dashboard.html";
 }
+/* ---------------- SUBJECT LIST ---------------- */
+const subjects = ["Physics", "Chemistry", "Maths", "Biology", "English"];
+
+function loadSubjects() {
+  const box = document.getElementById("subject-container");
+  box.innerHTML += `<div class="subject-buttons"></div>`;
+  const area = box.querySelector(".subject-buttons");
+
+  subjects.forEach(sub => {
+    area.innerHTML += `<button onclick="selectSubject('${sub}')">${sub}</button>`;
+  });
+}
+
+function selectSubject(sub) {
+  localStorage.setItem("selectedSubject", sub);
+  window.location.href = "notes.html";
+}
+
+/* Auto-load on notes.html */
+if (window.location.pathname.includes("notes.html")) {
+  loadSubjects();
+}
+
