@@ -39,6 +39,13 @@ body {
   align-items: center;
   justify-content: flex-end;
 }
+.right-nav {
+  position: relative;
+  margin-right: 20px;  /* prevents cutoff */
+}
+.account-dropdown {
+  right: 0;   /* ensures dropdown aligns correctly */
+}
 
 .account-btn {
   padding: 10px 20px;
@@ -152,3 +159,4 @@ body {
 #change-pass-box input {
   width: 100%;
 }
+
