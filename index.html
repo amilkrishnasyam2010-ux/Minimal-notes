@@ -4,8 +4,6 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Minimal Notes</title>
-
-  <!-- Correct stylesheet -->
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
@@ -21,8 +19,8 @@
       <button class="account-btn" onclick="toggleAccountMenu()">Account</button>
 
       <div id="account-menu" class="account-dropdown hidden">
-        <button onclick="openLogin()">Login</button>
-        <button onclick="openSignup()">Sign Up</button>
+        <button type="button" onclick="openLogin()">Login</button>
+        <button type="button" onclick="openSignup()">Sign Up</button>
       </div>
     </div>
   </header>
@@ -40,6 +38,7 @@
         <div class="feature-card">Instant Access</div>
         <div class="feature-card">Download Anytime</div>
       </div>
+      <p class="promo">🔥 Minimal Notes – Free + Premium Exam-Ready Notes — Super simplified. Download now. All subjects will be added soon.</p>
     </section>
   </main>
 
@@ -53,6 +52,7 @@
       <button onclick="loginUser()">Login</button>
 
       <hr>
+
       <button class="change-pass-btn" onclick="showChangePass()">Change Password</button>
 
       <div id="change-pass-box" class="hidden">
@@ -74,8 +74,6 @@
     </div>
   </div>
 
-  <!-- IMPORTANT: You were missing this -->
   <script src="script.js"></script>
-
 </body>
 </html>
