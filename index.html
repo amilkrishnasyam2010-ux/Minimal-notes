@@ -1,79 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Minimal Notes</title>
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-  <!-- TOP NAV -->
-  <header class="top-nav">
-    <div class="left-nav">
-      <img src="images/logo.png" class="nav-logo" alt="Minimal Notes Logo" onerror="this.style.display='none'">
-      <span class="brand-name">Minimal Notes</span>
-    </div>
-
-    <div class="right-nav">
-      <button class="account-btn" onclick="toggleAccountMenu()">Account</button>
-
-      <div id="account-menu" class="account-dropdown hidden">
-        <button type="button" onclick="openLogin()">Login</button>
-        <button type="button" onclick="openSignup()">Sign Up</button>
-      </div>
-    </div>
-  </header>
-
-  <main style="padding-top:100px;">
-    <section class="hero">
-      <h1>One place for all your learning</h1>
-      <p class="tagline">Notes, question banks & one-word answers — organized beautifully.</p>
-    </section>
-
-    <section class="features">
-      <h2>Why Minimal Notes?</h2>
-      <div class="feature-grid">
-        <div class="feature-card">Organized Notes</div>
-        <div class="feature-card">Instant Access</div>
-        <div class="feature-card">Download Anytime</div>
-      </div>
-      <p class="promo">🔥 Minimal Notes – Free + Premium Exam-Ready Notes — Super simplified. Download now. All subjects will be added soon.</p>
-    </section>
-  </main>
-
-  <!-- LOGIN MODAL -->
-  <div id="login-modal" class="modal hidden">
-    <div class="modal-content">
-      <span class="close-modal" onclick="closeAllModals()">×</span>
-      <h2>Login</h2>
-      <input id="login-username" placeholder="Username" />
-      <input id="login-password" type="password" placeholder="Password" />
-      <button onclick="loginUser()">Login</button>
-
-      <hr>
-
-      <button class="change-pass-btn" onclick="showChangePass()">Change Password</button>
-
-      <div id="change-pass-box" class="hidden">
-        <input id="old-pass" type="password" placeholder="Old Password" />
-        <input id="new-pass" type="password" placeholder="New Password" />
-        <button onclick="changePassword()">Confirm</button>
-      </div>
-    </div>
+<header class="top-nav">
+  <div class="left-nav">
+    <img src="images/logo.png" class="nav-logo" alt="Logo">
+    <span class="brand-name">Minimal Notes</span>
   </div>
 
-  <!-- SIGNUP MODAL -->
-  <div id="signup-modal" class="modal hidden">
-    <div class="modal-content">
-      <span class="close-modal" onclick="closeAllModals()">×</span>
-      <h2>Create Account</h2>
-      <input id="signup-username" placeholder="New Username" />
-      <input id="signup-password" type="password" placeholder="New Password" />
-      <button onclick="signupUser()">Sign Up</button>
+  <div class="right-nav">
+    <button class="account-btn" onclick="toggleAccountMenu()">Account</button>
+    <div id="account-menu" class="account-dropdown hidden">
+      <button onclick="openLogin()">Login</button>
+      <button onclick="openSignup()">Sign Up</button>
     </div>
   </div>
+</header>
 
-  <script src="script.js"></script>
+<main style="padding-top:100px;">
+  <section class="hero">
+    <h1>One place for all your learning</h1>
+    <p class="tagline">Notes, question banks & one-word answers — organized beautifully.</p>
+  </section>
+
+  <section class="features">
+    <h2>Why Minimal Notes?</h2>
+    <div class="feature-grid">
+      <div class="feature-card">Organized Notes</div>
+      <div class="feature-card">Instant Access</div>
+      <div class="feature-card">Download Anytime</div>
+    </div>
+  </section>
+</main>
+
+<!-- LOGIN MODAL -->
+<div id="login-modal" class="modal hidden">
+  <div class="modal-content">
+    <span class="close-modal" onclick="closeAllModals()">×</span>
+    <h2>Login</h2>
+    <input id="login-username" placeholder="Username">
+    <input id="login-password" type="password" placeholder="Password">
+    <button onclick="loginUser()">Login</button>
+  </div>
+</div>
+
+<!-- SIGNUP MODAL -->
+<div id="signup-modal" class="modal hidden">
+  <div class="modal-content">
+    <span class="close-modal" onclick="closeAllModals()">×</span>
+    <h2>Create Account</h2>
+    <input id="signup-username" placeholder="New Username">
+    <input id="signup-password" type="password" placeholder="New Password">
+    <button onclick="signupUser()">Sign Up</button>
+  </div>
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>
