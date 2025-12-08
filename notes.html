@@ -1,54 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Notes Selection - Minimal Notes</title>
-
-  <!-- IMPORTANT: MUST match the filename in GitHub -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Notes - Minimal Notes</title>
   <link rel="stylesheet" href="styles.css">
-
 </head>
 
 <body>
 
-  <!-- TOP NAV (Matches Homepage + Dashboard) -->
-  <header class="top-nav">
-    <div class="left-nav">
-      <img src="images/logo.png" class="nav-logo" alt="Logo">
-      <span class="brand-name">Minimal Notes</span>
-    </div>
+<header class="small-header">
+  <h1 id="section-title">Notes</h1>
+  <button onclick="goBackDashboard()" class="logout-btn">Dashboard</button>
+</header>
 
-    <div class="right-nav">
-      <button class="account-btn" onclick="goBackDashboard()">Dashboard</button>
-    </div>
-  </header>
+<main class="notes-container">
 
-  <!-- MAIN CONTENT -->
-  <main class="notes-container" style="padding-top:120px;">
+  <div id="subject-container" class="fade-in">
+    <h2>Select a Subject</h2>
+  </div>
 
-    <!-- Step 1: Choose Subject -->
-    <div id="subject-container" class="fade-in">
-      <h2>Select a Subject</h2>
-      <!-- JS inserts buttons -->
-    </div>
+  <div id="chapter-container" class="hidden fade-in"></div>
 
-    <!-- Step 2: Choose Chapter -->
-    <div id="chapter-container" class="hidden fade-in"></div>
+  <div id="code-container" class="hidden fade-in">
+    <h3>Enter Access Code</h3>
+    <input id="code-input" placeholder="Enter your code" />
+    <button onclick="verifyCode()">Submit</button>
+  </div>
 
-    <!-- Step 3: Enter Code -->
-    <div id="code-container" class="hidden fade-in">
-      <h3>Enter Access Code</h3>
-      <input type="text" id="code-input" placeholder="Enter your code" />
-      <button onclick="verifyCode()">Submit</button>
-    </div>
+  <div id="pdf-container" class="hidden fade-in"></div>
 
-    <!-- Step 4: PDF Display -->
-    <div id="pdf-container" class="hidden fade-in"></div>
+</main>
 
-  </main>
-
-  <!-- Script -->
-  <script src="script.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
