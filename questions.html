@@ -1,41 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Question Bank - Minimal Notes</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css" />
 </head>
-
 <body>
 
-<!-- HEADER -->
-<header class="small-header">
-  <h1>Question Bank</h1>
-  <button onclick="goBackDashboard()" class="logout-btn">Dashboard</button>
+<header class="top-nav">
+  <div class="left-nav">
+    <img src="images/logo.png" class="nav-logo" alt="Logo" />
+    <span class="brand-name">Minimal Notes</span>
+  </div>
+  <div class="right-nav">
+    <button class="account-btn" onclick="goBackDashboard()">Dashboard</button>
+  </div>
 </header>
 
-<!-- MAIN CONTENT -->
-<main class="notes-container">
-
-  <!-- SUBJECT SELECTION -->
-  <div id="qb-subjects">
-    <h2>Select a Subject</h2>
-  </div>
-
-  <!-- CHAPTER SELECTION -->
+<main class="notes-container" style="padding-top:92px;">
+  <div id="qb-subjects"><h2>Select a Subject</h2></div>
   <div id="qb-chapters" class="hidden"></div>
-
-  <!-- ACCESS CODE BOX -->
   <div id="qb-code-box" class="hidden">
     <h3>Enter Access Code</h3>
-    <input id="qb-code" type="text" placeholder="Enter your code">
-    <button onclick="verifyQBCode()">Submit</button>
+    <input id="qb-code" type="text" placeholder="Enter your code" />
+    <button onclick="verifyCode()">Submit</button>
   </div>
-
-  <!-- PDF VIEW -->
   <div id="qb-pdf-box" class="hidden"></div>
-
 </main>
 
 <script src="script.js"></script>
