@@ -1,4 +1,8 @@
 /* ------------------ QUESTION BANK PAGE ------------------ */
+function toggleAccountMenu() {
+  const menu = document.getElementById("account-menu");
+  menu.classList.toggle("hidden");
+}
 
 const QB_SUBJECTS = ["Physics", "Chemistry", "Biology", "Maths"];
 
@@ -78,3 +82,4 @@ function showQBPdf() {
 function goBackDashboard() {
   window.location.href = "dashboard.html";
 }
+
