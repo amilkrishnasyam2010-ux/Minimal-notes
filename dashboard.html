@@ -1,46 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Dashboard - Minimal Notes</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
-
 <body>
 
-  <div class="top-nav">
+  <header class="top-nav">
     <div class="left-nav">
-      <img src="logo.png" class="nav-logo">
+      <img src="images/logo.png" class="nav-logo" alt="Logo" />
       <span class="brand-name">Minimal Notes</span>
     </div>
-
-    <button class="account-btn" onclick="logoutUser()">Logout</button>
-  </div>
-
-  <header class="small-header">
-    <h1>Welcome, <span id="user-name"></span></h1>
+    <div class="right-nav">
+      <button class="account-btn" onclick="logoutUser()">Logout</button>
+    </div>
   </header>
 
-  <main class="dashboard">
+  <header class="small-header" style="margin-top:72px;">
+    <h1>Welcome, <span id="user-name"></span> 👋</h1>
+  </header>
+
+  <main class="dashboard" style="padding:24px;">
     <section>
       <h2>Your Downloads</h2>
-      <ul id="downloaded-list">No notes downloaded yet.</ul>
+      <ul id="downloaded-list"></ul>
     </section>
 
-    <section>
+    <section style="margin-top:20px;">
       <h2>Explore</h2>
       <div class="dashboard-btns">
-        <button onclick="goTo('notes')">Notes</button>
-        <button onclick="goTo('questions')">Question Bank</button>
-        <button onclick="goTo('oneword')">One Word</button>
+        <button onclick="goTo('notes')">🗒️ Notes</button>
+        <button onclick="goTo('questions')">❓ Question Bank</button>
+        <button onclick="goTo('oneword')">🧩 One Word</button>
       </div>
     </section>
   </main>
-
-  <footer>
-    <p>© 2025 Minimal Notes</p>
-  </footer>
 
   <script src="script.js"></script>
 </body>
