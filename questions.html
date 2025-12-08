@@ -9,29 +9,31 @@
 
 <body>
 
+<!-- HEADER -->
 <header class="small-header">
   <h1>Question Bank</h1>
   <button onclick="goBackDashboard()" class="logout-btn">Dashboard</button>
 </header>
 
+<!-- MAIN CONTENT -->
 <main class="notes-container">
 
-  <!-- Step 1: Subjects -->
+  <!-- SUBJECT SELECTION -->
   <div id="qb-subjects">
     <h2>Select a Subject</h2>
   </div>
 
-  <!-- Step 2: Chapters -->
+  <!-- CHAPTER SELECTION -->
   <div id="qb-chapters" class="hidden"></div>
 
-  <!-- Step 3: Code -->
+  <!-- ACCESS CODE BOX -->
   <div id="qb-code-box" class="hidden">
     <h3>Enter Access Code</h3>
     <input id="qb-code" type="text" placeholder="Enter your code">
     <button onclick="verifyQBCode()">Submit</button>
   </div>
 
-  <!-- Step 4: PDF -->
+  <!-- PDF VIEW -->
   <div id="qb-pdf-box" class="hidden"></div>
 
 </main>
