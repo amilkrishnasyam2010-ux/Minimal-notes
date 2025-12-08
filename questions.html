@@ -15,8 +15,25 @@
 </header>
 
 <main class="notes-container">
-  <h2>Select a Subject</h2>
-  <div id="qb-subjects"></div>
+
+  <!-- Step 1: Subjects -->
+  <div id="qb-subjects">
+    <h2>Select a Subject</h2>
+  </div>
+
+  <!-- Step 2: Chapters -->
+  <div id="qb-chapters" class="hidden"></div>
+
+  <!-- Step 3: Code -->
+  <div id="qb-code-box" class="hidden">
+    <h3>Enter Access Code</h3>
+    <input id="qb-code" type="text" placeholder="Enter your code">
+    <button onclick="verifyQBCode()">Submit</button>
+  </div>
+
+  <!-- Step 4: PDF -->
+  <div id="qb-pdf-box" class="hidden"></div>
+
 </main>
 
 <script src="script.js"></script>
