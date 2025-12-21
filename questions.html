@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Question Bank - Minimal Notes</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="nav-brand">
+        <img src="images/logo.png" alt="Minimal Notes Logo" class="logo">
+        <span class="brand-name">Minimal Notes</span>
+      </div>
+      <div class="nav-actions">
+        <a href="dashboard.html" class="btn btn-outline btn-sm">Dashboard</a>
+        <button class="btn btn-outline btn-sm" id="logoutBtn">Logout</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Resource Content -->
+  <main class="resource-container">
+    <div class="resource-content">
+      <h1 class="page-title">Question Bank</h1>
+      <p class="page-subtitle">Select a subject to view available chapters</p>
+
+      <!-- Subject Selection -->
+      <div id="subjectSection" class="selection-section">
+        <h2 class="section-title">Select Subject</h2>
+        <div class="button-grid" id="subjectButtons"></div>
+      </div>
+
+      <!-- Chapter Selection -->
+      <div id="chapterSection" class="selection-section" style="display: none;">
+        <h2 class="section-title">Select Chapter</h2>
+        <button class="btn btn-text" id="backToSubjects">← Back to Subjects</button>
+        <div class="button-grid" id="chapterButtons"></div>
+      </div>
+
+      <!-- PDF Viewer -->
+      <div id="pdfSection" class="pdf-section" style="display: none;">
+        <div class="pdf-header">
+          <h2 class="section-title" id="pdfTitle"></h2>
+          <div class="pdf-actions">
+            <button class="btn btn-outline" id="downloadPdfBtn">Download PDF</button>
+            <button class="btn btn-text" id="closePdfBtn">Close</button>
+          </div>
+        </div>
+        <div class="pdf-viewer">
+          <iframe id="pdfViewer" frameborder="0"></iframe>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Access Code Modal -->
+  <div class="modal" id="accessCodeModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Enter Access Code</h2>
+        <button class="modal-close" data-modal="accessCodeModal">&times;</button>
+      </div>
+      <form id="accessCodeForm">
+        <div class="form-group">
+          <label for="accessCodeInput">Access Code</label>
+          <input type="text" id="accessCodeInput" required placeholder="MN12345">
+          <small class="form-hint">Enter the access code for this resource</small>
+        </div>
+        <button type="submit" class="btn btn-primary btn-full">Submit</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="toast" id="toast"></div>
+
+  <script src="script.js"></script>
+  <script>
+    // Set resource type for this page
+    window.currentResourceType = 'questions';
+  </script>
+</body>
+</html>
